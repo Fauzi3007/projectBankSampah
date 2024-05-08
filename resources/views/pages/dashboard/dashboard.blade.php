@@ -7,14 +7,13 @@
         <!-- Dashboard actions -->
         <div class="sm:flex sm:justify-between sm:items-center mb-8">
 
-            <!-- Left: Avatars -->
-            <x-dashboard.dashboard-avatars />
+          
 
             <!-- Right: Actions -->
             <div class="grid grid-flow-col sm:auto-cols-max justify-start sm:justify-end gap-2">
 
                 <!-- Filter button -->
-                <x-dropdown-filter align="right" />
+                <x-dropdown-filter align="left" />
 
                 <!-- Datepicker built with flatpickr -->
                 <x-datepicker />
@@ -34,44 +33,73 @@
         <!-- Cards -->
         <div class="grid grid-cols-12 gap-6">
 
-            <!-- Line chart (Acme Plus) -->
-            <x-dashboard.dashboard-card-01 :dataFeed="$dataFeed" />
+      
+            <div class="col-span-full  bg-white dark:bg-slate-800 shadow-lg rounded-sm border border-slate-200 dark:border-slate-700">
+                <header class="px-5 py-4 border-b border-slate-100 dark:border-slate-700">
+                    <h2 class="font-semibold text-slate-800 dark:text-slate-100">Dashboard</h2>
+                </header>
+                <div class="p-3">
+                    
+                    <!-- Table -->
+                    <div class="overflow-x-auto">
+                        <table class="table-auto w-full">
+                            <!-- Table header -->
+                            <thead class="text-xs font-semibold uppercase text-slate-400 dark:text-slate-500 bg-slate-50 dark:bg-slate-700 dark:bg-opacity-50">
+                                <tr>
+                                    <th class="p-2 whitespace-nowrap">
+                                        <div class="font-semibold text-left">No</div>
+                                    </th>
+                                    <th class="p-2 whitespace-nowrap">
+                                        <div class="font-semibold text-left">Tanggal</div>
+                                    </th>
+                                    <th class="p-2 whitespace-nowrap">
+                                        <div class="font-semibold text-left">Kategori</div>
+                                    </th>
+                                    <th class="p-2 whitespace-nowrap">
+                                        <div class="font-semibold text-left">Sarana</div>
+                                    </th>
+                                    <th class="p-2 whitespace-nowrap">
+                                        <div class="font-semibold text-left">Jumlah</div>
+                                    </th>
+                                    
+                                </tr>
+                            </thead>
+                            <tbody class="text-sm divide-y divide-slate-100 dark:divide-slate-700">
+                                @forelse($perhitunganSampah as $item)
+                                    <tr>
+                                        <td class="p-2 whitespace-nowrap">
+                                            <div class="text-left">{{ $loop->iteration }}</div>
+                                        </td>
+                                        <td class="p-2 whitespace-nowrap">
+                                            <div class="text-left">{{ $item->tanggal }}</div>
+                                        </td>
+                                        <td class="p-2 whitespace-nowrap">
+                                            <div class="text-left">{{$item->kategori->nama_kategori}}</div>
+                                        </td>
+                                        <td class="p-2 whitespace-nowrap">
+                                            <div class="text-left">{{ $item->sarana->nama_sarana }}</div>
+                                        </td>
+                                        <td class="p-2 whitespace-nowrap">
+                                            <div class="text-left">{{ $item->jumlah_sampah }}</div>
+                                        </td>
+                                        
+                                    </tr>
+                                @empty
+                                    <tr>
+                                        <td colspan="4" class="p-2 whitespace-nowrap">
+                                            <div class="text-center">No data available</div>
+                                        </td>
+                                    </tr>
+                                @endforelse
+                         
+                            </tbody>
+                        </table>
+                    
+                    </div>
+                
+                </div>
+            </div>
 
-            <!-- Line chart (Acme Advanced) -->
-            <x-dashboard.dashboard-card-02 :dataFeed="$dataFeed" />
-
-            <!-- Line chart (Acme Professional) -->
-            <x-dashboard.dashboard-card-03 :dataFeed="$dataFeed" />
-
-            <!-- Bar chart (Direct vs Indirect) -->
-            <x-dashboard.dashboard-card-04 />
-
-            <!-- Line chart (Real Time Value) -->
-            <x-dashboard.dashboard-card-05 />
-
-            <!-- Doughnut chart (Top Countries) -->
-            <x-dashboard.dashboard-card-06 />
-
-            <!-- Table (Top Channels) -->
-            <x-dashboard.dashboard-card-07 />
-
-            <!-- Line chart (Sales Over Time)  -->
-            <x-dashboard.dashboard-card-08 />
-
-            <!-- Stacked bar chart (Sales VS Refunds) -->
-            <x-dashboard.dashboard-card-09 />
-
-            <!-- Card (Customers)  -->
-            <x-dashboard.dashboard-card-10 />
-
-            <!-- Card (Reasons for Refunds)   -->
-            <x-dashboard.dashboard-card-11 />             
-
-            <!-- Card (Recent Activity) -->
-            <x-dashboard.dashboard-card-12 />
-            
-            <!-- Card (Income/Expenses) -->
-            <x-dashboard.dashboard-card-13 />
 
         </div>
 

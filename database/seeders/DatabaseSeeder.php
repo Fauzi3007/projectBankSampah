@@ -2,6 +2,12 @@
 
 namespace Database\Seeders;
 
+use App\Models\Kategori;
+use App\Models\Mitra;
+use App\Models\PerhitunganSampah;
+use App\Models\Sarana;
+use App\Models\User;
+use Database\Factories\UserFactory;
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
 
@@ -14,20 +20,18 @@ class DatabaseSeeder extends Seeder
      */
     public function run()
     {
-
-        $this->call([
-            DashboardTableSeeder::class,
-            AnalyticsTableSeeder::class,
-            FintechTableSeeder::class,
-            CustomerSeeder::class,
-            OrderSeeder::class,
-            InvoiceSeeder::class,
-            MemberSeeder::class,
-            TransactionSeeder::class,
-            JobSeeder::class,
-            CampaignSeeder::class,
-            MarketerSeeder::class,
-            CampaignMarketerSeeder::class,
+        User::factory()->create([
+            'email' => 'admin@gmail.com',
+            'role' => 'admin'
         ]);
+        User::factory()->create([
+            'email' => 'mitra@gmail.com',
+        ]);
+
+        Kategori::factory()->count(10)->create();
+        Mitra::factory()->count(10)->create();
+        PerhitunganSampah::factory()->count(10)->create();
+        Sarana::factory()->count(10)->create();
+        
     }
 }

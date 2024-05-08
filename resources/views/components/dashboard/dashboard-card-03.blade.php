@@ -49,7 +49,7 @@
         <h2 class="text-lg font-semibold text-slate-800 dark:text-slate-100 mb-2">Acme Professional</h2>
         <div class="text-xs font-semibold text-slate-400 dark:text-slate-500 uppercase mb-1">Sales</div>
         <div class="flex items-start">
-            <div class="text-3xl font-bold text-slate-800 dark:text-slate-100 mr-2">${{ number_format($dataFeed->sumDataSet(3, 1), 0) }}</div>
+            <div class="text-3xl font-bold text-slate-800 dark:text-slate-100 mr-2"></div>
             <div class="text-sm font-semibold text-white px-1.5 bg-emerald-500 rounded-full">+29%</div>
         </div>
     </div>
