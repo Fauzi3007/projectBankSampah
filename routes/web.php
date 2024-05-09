@@ -2,6 +2,7 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\DashboardController;
+use App\Http\Controllers\ExcelUploadController;
 use App\Http\Controllers\KategoriController;
 use App\Http\Controllers\PenggunaSaranaController;
 use App\Http\Controllers\PerhitunganSampahController;
@@ -31,6 +32,7 @@ Route::middleware(['auth:sanctum', 'verified'])->group(function () {
     Route::resource('sarana', SaranaController::class);
     Route::resource('kategori', KategoriController::class);
     Route::resource('pengguna_sarana', PenggunaSaranaController::class)->middleware('admin');
+    Route::post('excel-upload', [ExcelUploadController::class, 'index'])->name('excel.upload');
 
     Route::fallback(function() {
         return view('pages/utility/404');

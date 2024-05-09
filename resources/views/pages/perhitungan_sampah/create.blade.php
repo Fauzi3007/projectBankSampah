@@ -48,12 +48,12 @@
 
       <div class="mt-3">
         <div id="horizontal-alignment-1" role="tabpanel" aria-labelledby="horizontal-alignment-item-1">
-            <form action="" method="post" class="grid grid-cols-2 gap-6 mt-2">
+            <form action="{{route('perhitungan_sampah.store')}}" method="post" class="grid grid-cols-2 gap-6 mt-2">
                 @csrf
               <div class="grid grid-cols-1 gap-6 sm:grid-cols-2">
 
                   <x-label for="tanggal">{{ __('Tanggal') }} </x-label>
-                  <x-input id="tanggal" type="text" name="tanggal" :value="old('tanggal')"
+                  <x-input id="tanggal" type="date" name="tanggal" :value="old('tanggal')"
                       required />
 
                 <x-label for="kategori_id_kategori">{{ __('Kategori') }} </x-label>
@@ -86,7 +86,7 @@
           <x-validation-errors class="mt-4" />
         </div>
         <div id="horizontal-alignment-2" class="hidden" role="tabpanel" aria-labelledby="horizontal-alignment-item-2">
-            <form action="" method="post" class="grid grid-cols-2 gap-6 mt-2">
+            <form action="{{route('excel.upload')}}" enctype="multipart/form-data" method="post" class="grid grid-cols-2 gap-6 mt-2">
                 @csrf
               <div class="grid grid-cols-1 gap-6 sm:grid-cols-2">
 
@@ -103,8 +103,10 @@
                       </select>
 
                   <x-label for="file_excel">{{ __('File Excel') }} </x-label>
-                  <x-input id="file_excel" type="file"   name="file_excel" :value="old('file_excel')" required />
-                  <span>Download </span><a class="text-blue-600" href="/download-excel">template.xlsx</a>
+                  <x-input id="file_excel" type="file" name="file_excel"
+                  name="excel_file"
+                  accept=".xlsx,.xls" :value="old('file_excel')" required />
+                 <a class="text-blue-600" href="/download-excel">Download template.xlsx</a>
 
 
               </div>

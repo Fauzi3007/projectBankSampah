@@ -94,6 +94,10 @@
 
                         </tbody>
                     </table>
+                    <!-- Pagination -->
+                    <div class="mt-4">
+                        {{ $perhitunganSampah->links() }}
+                    </div>
 
                 </div>
 

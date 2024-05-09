@@ -4,7 +4,9 @@ namespace App\Http\Controllers;
 
 use App\Models\PenggunaSarana;
 use App\Models\User;
+use Illuminate\Support\Facades\Hash;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class PenggunaSaranaController extends Controller
 {
@@ -13,7 +15,7 @@ class PenggunaSaranaController extends Controller
      */
     public function index()
     {
-        $pengguna_saranas = PenggunaSarana::all();
+        $pengguna_saranas = PenggunaSarana::paginate(5);
         return view('pages.pengguna_sarana.index', compact('pengguna_saranas'));
     }
 
@@ -41,7 +43,7 @@ class PenggunaSaranaController extends Controller
         User::create([
             'name' => $validatedData['nama_pengguna'],
             'email' => $validatedData['email'],
-            'password' => bcrypt($validatedData['password']),
+            'password' => Hash::make($validatedData['password']),
             'role' => $validatedData['role'],
         ]);
 
@@ -49,6 +51,7 @@ class PenggunaSaranaController extends Controller
             'id_akun'=> User::latest()->first()->id,
             'nama_pengguna' => $validatedData['nama_pengguna'],
             'no_hp' => $validatedData['no_hp'],
+            'sarana_id_sarana' => Auth::user()->id,
         ]);
 
 
@@ -81,6 +84,8 @@ class PenggunaSaranaController extends Controller
             'id_akun' => ['required', 'max:20'],
             'nama_pengguna' => ['required', 'max:50'],
             'no_hp' => ['required', 'max:20'],
+            'sarana_id_sarana' => Auth::user()->id,
+
 
         ]);
 

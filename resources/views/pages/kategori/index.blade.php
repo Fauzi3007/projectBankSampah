@@ -9,7 +9,7 @@
               <!-- Datepicker built with flatpickr -->
               <x-datepicker />
               <!-- Add view button -->
-              
+
           </div>
       </div>
       <!-- Cards -->
@@ -19,13 +19,18 @@
           </svg>
           <span class="ml-2">Tambah Kategori</span>
       </a>
+      @if(session('success'))
+      <div class="bg-green-500 text-white px-4 py-2 mt-4 rounded-md">
+          {{ session('success') }}
+      </div>
+  @endif
       <div class="grid grid-cols-12 gap-6 mt-2">
         <div class="col-span-full  bg-white dark:bg-slate-800 shadow-lg rounded-sm border border-slate-200 dark:border-slate-700">
             <header class="px-5 py-4 border-b border-slate-100 dark:border-slate-700">
                 <h2 class="font-semibold text-slate-800 dark:text-slate-100">Kategori</h2>
             </header>
             <div class="p-3">
-                
+
                 <!-- Table -->
                 <div class="overflow-x-auto">
                     <table class="table-auto w-full">
@@ -41,17 +46,17 @@
                                 <th class="p-2 whitespace-nowrap">
                                     <div class="font-semibold text-center">Aksi</div>
                                 </th>
-                                
+
                             </tr>
                         </thead>
                         <!-- Table body -->
                         <tbody class="text-sm divide-y divide-slate-100 dark:divide-slate-700">
                             <tr>
-                                @forelse ($kategoris as $item) 
-                                
+                                @forelse ($kategoris as $item)
+
                                 <td class="p-2 whitespace-nowrap">
                                     <div class="flex items-center">
-                                        
+
                                         <div class="font-medium text-slate-800">{{$loop->iteration}}</div>
                                     </div>
                                 </td>
@@ -66,7 +71,7 @@
                                         <button type="submit" class="p-2 rounded-md bg-red-600 hover:bg-red-500 text-white sm:mt-0" onclick="return confirm('Yakin akan menghapus data?')"> Hapus </button>
                                     </form>
                                 </td>
-                               
+
                             </tr>
                             @empty
                                 <tr>
@@ -75,12 +80,16 @@
                                     </td>
                                 </tr>
                             @endforelse
-                                                                                           
+
                         </tbody>
                     </table>
-                
+                    <!-- Pagination -->
+                    <div class="mt-4">
+                        {{ $kategoris->links() }}
+                    </div>
+
                 </div>
-            
+
             </div>
         </div>
       </div>

@@ -19,6 +19,11 @@
           </svg>
           <span class="ml-2">Tambah Sarana</span>
       </a>
+      @if(session('success'))
+      <div class="bg-green-500 text-white px-4 py-2 mt-4 rounded-md">
+          {{ session('success') }}
+      </div>
+  @endif
       <div class="grid grid-cols-12 gap-6 mt-2">
         <div class="col-span-full  bg-white dark:bg-slate-800 shadow-lg rounded-sm border border-slate-200 dark:border-slate-700">
             <header class="px-5 py-4 border-b border-slate-100 dark:border-slate-700">
@@ -94,6 +99,10 @@
 
                         </tbody>
                     </table>
+                    <!-- Pagination -->
+                    <div class="mt-4">
+                        {{ $saranas->links() }}
+                    </div>
 
                 </div>
 

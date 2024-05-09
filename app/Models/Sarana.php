@@ -11,7 +11,7 @@ class Sarana extends Model
 
     protected $table = 'saranas';
     protected $primaryKey = 'id_sarana';
-    protected $fillable = ['nama_sarana', 'alamat_sarana', 'jenis_sarana', 'mitra_id_mitra'];
+    protected $fillable = ['nama_sarana', 'alamat_sarana', 'jenis_sarana', 'pengguna_sarana_id_pengguna_sarana'];
     public $timestamps = true;
 
     public function pengguna() { return $this->belongsTo(PenggunaSarana::class, 'pengguna_sarana_id_pengguna_sarana'); }

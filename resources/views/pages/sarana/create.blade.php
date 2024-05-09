@@ -14,12 +14,12 @@
 
               <x-label for="jenis_sarana">{{ __('Jenis Sarana') }} </x-label>
               <x-input id="jenis_sarana" type="text"  name="jenis_sarana" :value="old('jenis_sarana')" required />
-              
-              <x-label for="mitra">{{ __('Mitra') }} </x-label>
-               <select id="mitra" name="mitra" required class="border-gray-300 focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50 rounded-md shadow-sm">
+
+              <x-label for="pengguna_saranas_id_pengguna_saranas">{{ __('Pengguna Sarana') }} </x-label>
+               <select id="pengguna_saranas_id_pengguna_saranas" name="pengguna_sarana_id_pengguna_sarana" required class="border-gray-300 focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50 rounded-md shadow-sm">
                     <option value="" disabled selected>Select an option</option>
-                @foreach($mitras as $mitra)
-                    <option value="{{ $mitra->id_mitra }}">{{ $mitra->nama_admin }}</option>
+                @foreach($pengguna_saranas as $pengguna_sarana)
+                    <option value="{{ $pengguna_sarana->id_pengguna_sarana }}">{{ $pengguna_sarana->nama_pengguna }}</option>
                 @endforeach
                 </select>
 
@@ -31,7 +31,7 @@
               </x-button>
           </div>
       </form>
-      <x-validation-errors class="mt-4" /> 
+      <x-validation-errors class="mt-4" />
   </div>
 
 </x-app-layout>

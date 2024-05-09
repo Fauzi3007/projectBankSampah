@@ -18,14 +18,12 @@ class ExcelUploadController extends Controller
         $sarana = $request->filled('sarana_id_sarana') ? $request->input('sarana_id_sarana') : 0;
 
         $request->validate([
-            'file_excel' => 'required|file|mimes:xls,xlsx',
+            'excel_file' => 'required',
         ]);
 
-        $file = $request->file('file_excel');
+        $file = $request->file('excel_file');
         $spreadsheet = IOFactory::load($file->getPathname());
         $worksheet = $spreadsheet->getActiveSheet();
-
-
 
         $row = 4;
         $totalRow = $worksheet->getHighestRow();
@@ -33,7 +31,7 @@ class ExcelUploadController extends Controller
             $kategori = strtolower($worksheet->getCell('B' . $row)->getValue());
             $jumlahSampah = $worksheet->getCell('C' . $row)->getValue();
 
-            $existingKategori = PerhitunganSampah::whereRaw('LOWER(nama_kategori) = ?', [$kategori])->first();
+            $existingKategori = Kategori::whereRaw('LOWER(nama_kategori) = ?', [$kategori])->first();
             if (!$existingKategori) {
             $existingKategori = Kategori::create([
                 'nama_kategori' => $kategori,

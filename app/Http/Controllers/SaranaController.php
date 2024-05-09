@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Mitra;
+use App\Models\PenggunaSarana;
 use App\Models\Sarana;
 use Illuminate\Http\Request;
 
@@ -13,8 +13,8 @@ class SaranaController extends Controller
      */
     public function index()
     {
-        $saranas = Sarana::all();
-        return view('pages.sarana.index', compact('saranas')); 
+        $saranas = Sarana::paginate(5);
+        return view('pages.sarana.index', compact('saranas'));
     }
 
     /**
@@ -22,8 +22,8 @@ class SaranaController extends Controller
      */
     public function create()
     {
-        $mitras = Mitra::all();
-        return view('pages.sarana.create', compact('mitras'));
+        $pengguna_saranas = PenggunaSarana::all();
+        return view('pages.sarana.create', compact('pengguna_saranas'));
     }
 
     /**
@@ -35,7 +35,7 @@ class SaranaController extends Controller
             'nama_sarana' => ['required', 'max:50'],
             'alamat_sarana' => ['required', 'max:100'],
             'jenis_sarana' => ['required', 'max:50'],
-            'mitra_id_mitra' => ['required'],
+            'pengguna_sarana_id_pengguna_sarana' => ['required'],
         ]);
 
         Sarana::create($validatedData);
@@ -57,8 +57,8 @@ class SaranaController extends Controller
      */
     public function edit(Sarana $sarana)
     {
-        $mitras = Mitra::all();
-        return view('pages.sarana.edit', compact('sarana', 'mitras'));
+        $pengguna_saranas = PenggunaSarana::all();
+        return view('pages.sarana.edit', compact('sarana', 'pengguna_saranas'));
     }
 
     /**
@@ -70,7 +70,7 @@ class SaranaController extends Controller
             'nama_sarana' => ['required', 'max:50'],
             'alamat_sarana' => ['required', 'max:100'],
             'jenis_sarana' => ['required', 'max:50'],
-            'mitra_id_mitra' => ['required'],
+            'pengguna_sarana_id_pengguna_sarana' => ['required'],
         ]);
 
         $sarana->update($validatedData);

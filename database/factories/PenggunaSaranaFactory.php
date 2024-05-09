@@ -19,6 +19,7 @@ class PenggunaSaranaFactory extends Factory
         return [
             'nama_pengguna' => $this->faker->name('id_ID'),
             'no_hp' => $this->faker->phoneNumber('id_ID'),
+            'id_akun' => 1,
         ];
     }
 }

@@ -14,7 +14,7 @@ class PerhitunganSampahController extends Controller
      */
     public function index()
     {
-        $perhitunganSampah = PerhitunganSampah::all();
+        $perhitunganSampah = PerhitunganSampah::paginate(5);
         return view('pages.perhitungan_sampah.index', compact('perhitunganSampah'));
     }
 
@@ -24,7 +24,7 @@ class PerhitunganSampahController extends Controller
     public function create()
     {
         $kategoris = Kategori::all();
-        $saranas = Sarana::all(); 
+        $saranas = Sarana::all();
         return view('pages.perhitungan_sampah.create', compact('kategoris', 'saranas'));
     }
 
@@ -58,7 +58,7 @@ class PerhitunganSampahController extends Controller
     public function edit(PerhitunganSampah $perhitunganSampah)
     {
         $kategoris = Kategori::all();
-        $saranas = Sarana::all(); 
+        $saranas = Sarana::all();
         return view('pages.perhitungan_sampah.edit', compact('perhitunganSampah', 'kategoris', 'saranas'));
     }
 
