@@ -8,6 +8,7 @@ use App\Models\PenggunaSarana;
 use App\Models\PerhitunganSampah;
 use App\Models\Sarana;
 use App\Models\User;
+use Database\Factories\SubkategoriFactory;
 use Database\Factories\UserFactory;
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
@@ -38,6 +39,7 @@ class DatabaseSeeder extends Seeder
         PenggunaSarana::factory()->count(10)->create();
         PerhitunganSampah::factory()->count(10)->create();
         Sarana::factory()->count(10)->create();
+        SubkategoriFactory::factory()->count(10)->create();
 
     }
 }
