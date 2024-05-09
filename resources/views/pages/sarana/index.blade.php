@@ -78,7 +78,7 @@
                                     <div class="text-left">{{$item->jenis_sarana}}</div>
                                 </td>
                                 <td class="p-2 whitespace-nowrap">
-                                    <div class="text-left">{{$item->pengguna->nama_pengguna}}</div>
+                                    <div class="text-left">{{$item->pengguna_sarana->nama_pengguna}}</div>
                                 </td>
                                 <td class="p-2 whitespace-nowrap flex justify-center items-center gap-1">
                                     <a href="{{route('sarana.edit',$item->id_sarana)}}" class="px-4 py-2 rounded-md bg-yellow-300 hover:bg-yellow-400 text-white sm:mt-0">Edit</a>

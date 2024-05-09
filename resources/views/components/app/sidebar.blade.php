@@ -108,7 +108,7 @@
                     </li>
 
                     <!-- Mitra -->
-                    @if (Auth::user()->role == 'admin')
+                    @if (Auth::user()->role == 'admin' || Auth::user()->role == 'super admin')
                         <li class="px-3 py-2 rounded-sm mb-0.5 last:mb-0 @if(in_array(Request::segment(1), ['pengguna_sarana'])){{ 'bg-slate-900' }}@endif">
                             <a title="pengguna_sarana" class="block text-slate-200 hover:text-white truncate transition duration-150 @if(in_array(Request::segment(1), ['pengguna_sarana'])){{ 'hover:text-slate-200' }}@endif" href="{{route('pengguna_sarana.index')}}">
                                 <div class="flex items-center">

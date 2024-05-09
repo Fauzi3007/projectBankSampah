@@ -14,6 +14,14 @@ class PenggunaSarana extends Model
     protected $fillable = ['nama_pengguna', 'no_hp','id_akun'];
     public $timestamps = true;
 
-    public function sarana() { return $this->hasMany(Sarana::class, 'pengguna_sarana_id_pengguna_sarana'); }
+    public function sarana()
+    {
+        return $this->hasMany(Sarana::class, 'pengguna_sarana_id_pengguna_sarana');
+    }
+
+    public function user()
+    {
+        return $this->belongsTo(User::class, 'id_akun');
+    }
 
 }

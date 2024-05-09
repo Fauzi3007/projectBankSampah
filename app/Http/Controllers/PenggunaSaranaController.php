@@ -15,7 +15,7 @@ class PenggunaSaranaController extends Controller
      */
     public function index()
     {
-        $pengguna_saranas = PenggunaSarana::paginate(5);
+        $pengguna_saranas = PenggunaSarana::orderBy('created_at', 'desc')->paginate(5);
         return view('pages.pengguna_sarana.index', compact('pengguna_saranas'));
     }
 

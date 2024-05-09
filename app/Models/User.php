@@ -27,7 +27,7 @@ class User extends Authenticatable
         'name',
         'email',
         'password',
-        'role'  
+        'role'
     ];
 
     /**
@@ -59,4 +59,9 @@ class User extends Authenticatable
     protected $appends = [
         'profile_photo_url',
     ];
+
+    public function pengguna_sarana()
+    {
+        return $this->hasOne(PenggunaSarana::class, 'id_akun');
+    }
 }

@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\PenggunaSarana;
 use App\Models\Sarana;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class SaranaController extends Controller
 {
@@ -13,8 +14,17 @@ class SaranaController extends Controller
      */
     public function index()
     {
-        $saranas = Sarana::paginate(5);
-        return view('pages.sarana.index', compact('saranas'));
+        if (Auth::user()->role == 'pengguna'){
+            $saranas = Sarana::where('pengguna_sarana_id_pengguna_sarana', Auth::user()->pengguna_sarana->id_pengguna_sarana)->paginate(5);
+            return view('pages.sarana.index', compact('saranas'));
+        }elseif (Auth::user()->role == 'admin'){
+            $saranas = Sarana::where('pengguna_sarana_id_pengguna_sarana', Auth::user()->pengguna_sarana->id_pengguna_sarana)->paginate(5);
+            return view('pages.sarana.index', compact('saranas'));
+        }else{
+            $saranas = Sarana::paginate(5);
+            return view('pages.sarana.index', compact('saranas'));
+        }
+
     }
 
     /**

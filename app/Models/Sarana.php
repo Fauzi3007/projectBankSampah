@@ -14,5 +14,8 @@ class Sarana extends Model
     protected $fillable = ['nama_sarana', 'alamat_sarana', 'jenis_sarana', 'pengguna_sarana_id_pengguna_sarana'];
     public $timestamps = true;
 
-    public function pengguna() { return $this->belongsTo(PenggunaSarana::class, 'pengguna_sarana_id_pengguna_sarana'); }
+    public function pengguna_sarana()
+    {
+        return $this->belongsTo(PenggunaSarana::class, 'pengguna_sarana_id_pengguna_sarana');
+    }
 }
