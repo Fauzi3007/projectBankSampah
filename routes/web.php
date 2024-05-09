@@ -6,6 +6,8 @@ use App\Http\Controllers\KategoriController;
 use App\Http\Controllers\PenggunaSaranaController;
 use App\Http\Controllers\PerhitunganSampahController;
 use App\Http\Controllers\SaranaController;
+use Illuminate\Support\Facades\Response;
+
 
 /*
 |--------------------------------------------------------------------------
@@ -28,9 +30,15 @@ Route::middleware(['auth:sanctum', 'verified'])->group(function () {
     Route::resource('perhitungan_sampah', PerhitunganSampahController::class);
     Route::resource('sarana', SaranaController::class);
     Route::resource('kategori', KategoriController::class);
-    Route::resource('pengguna_sarana', PenggunaSaranaController::class);
+    Route::resource('pengguna_sarana', PenggunaSaranaController::class)->middleware('admin');
 
     Route::fallback(function() {
         return view('pages/utility/404');
     });
+
+    Route::get('/download-excel', function () {
+        $file = public_path('/excel/template.xlsx');
+
+        return Response::download($file, 'template.xlsx');
+    })->name('download.excel');
 });

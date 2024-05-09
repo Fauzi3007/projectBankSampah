@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\PenggunaSarana;
+use App\Models\User;
 use Illuminate\Http\Request;
 
 class PenggunaSaranaController extends Controller
@@ -30,12 +31,27 @@ class PenggunaSaranaController extends Controller
     public function store(Request $request)
     {
         $validatedData = $request->validate([
-            'nama_admin' => ['required', 'max:50'],
+            'nama_pengguna' => ['required', 'max:50'],
             'no_hp' => ['required', 'max:20'],
+            'email' => ['required', 'max:50'],
+            'password' => ['required', 'max:50'],
             'role' => ['required', 'max:20'],
         ]);
 
-        PenggunaSarana::create($validatedData);
+        User::create([
+            'name' => $validatedData['nama_pengguna'],
+            'email' => $validatedData['email'],
+            'password' => bcrypt($validatedData['password']),
+            'role' => $validatedData['role'],
+        ]);
+
+        PenggunaSarana::create([
+            'id_akun'=> User::latest()->first()->id,
+            'nama_pengguna' => $validatedData['nama_pengguna'],
+            'no_hp' => $validatedData['no_hp'],
+        ]);
+
+
 
         return redirect()->route('pengguna_sarana.index')->with('success', 'Pengguna Sarana created successfully.');
     }
@@ -62,9 +78,10 @@ class PenggunaSaranaController extends Controller
     public function update(Request $request, PenggunaSarana $pengguna_sarana)
     {
         $validatedData = $request->validate([
-            'nama_admin' => ['required', 'max:50'],
+            'id_akun' => ['required', 'max:20'],
+            'nama_pengguna' => ['required', 'max:50'],
             'no_hp' => ['required', 'max:20'],
-            'role' => ['required', 'max:20'],
+
         ]);
 
         $pengguna_sarana->update($validatedData);

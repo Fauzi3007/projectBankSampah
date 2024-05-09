@@ -1,26 +1,42 @@
 <x-app-layout>
 
-  <div class="px-4 sm:px-6 lg:px-8 py-8 w-full max-w-9xl mx-auto">
-      <form action="{{route('mitra.store')}}" method="post" class="grid grid-cols-2 gap-6 mt-2">
+    <div class="px-4 sm:px-6 lg:px-8 py-8 w-full max-w-9xl mx-auto">
+        <form action="{{ route('pengguna_sarana.store') }}" method="post" class="grid grid-cols-2 gap-6 mt-2">
             @csrf
-          <div class="grid grid-cols-1 gap-6 sm:grid-cols-2">
+            <div class="grid grid-cols-1 gap-6 sm:grid-cols-2">
 
-              <x-label for="nama_admin">{{ __('Nama Admin') }} </x-label>
-              <x-input id="nama_admin" type="text" name="nama_admin" :value="old('nama_admin')"
-                  required />
+                <x-label for="nama_pengguna">{{ __('Nama Pengguna') }} </x-label>
+                <x-input id="nama_pengguna" type="text" name="nama_pengguna" :value="old('nama_pengguna')" required />
 
-              <x-label for="no_hp">{{ __('Nomor Telepon') }} </x-label>
-              <x-input id="no_hp" type="text"  name="no_hp" :value="old('no_hp')" required />
+                <x-label for="no_hp">{{ __('Nomor Telepon') }} </x-label>
+                <x-input id="no_hp" type="text" name="no_hp" :value="old('no_hp')" required />
 
-          </div>
+                <x-label for="email">{{ __('Email') }} </x-label>
+                <x-input id="email" type="text" name="email" :value="old('email')" required />
 
-          <div class="flex items-center justify-between mt-6 col-span-2">
-              <x-button type="submit">
-                  {{ __('Simpan') }}
-              </x-button>
-          </div>
-      </form>
-      <x-validation-errors class="mt-4" /> 
-  </div>
+                <x-label for="password">{{ __('Password') }} </x-label>
+                <x-input id="password" type="password" name="password" required />
+
+                <x-label for="password_confirmation">{{ __('Confirm Password') }} </x-label>
+                <x-input id="password_confirmation" type="password" name="password_confirmation" required />
+
+                <x-label for="role">{{ __('Role') }} </x-label>
+                <select name="role" id="role" class="rounded-md border-gray-300 focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50">
+                    <option value="admin">Admin</option>
+                    <option value="pengguna">Pengguna</option>
+                </select>
+
+
+
+            </div>
+
+            <div class="flex items-center justify-between mt-6 col-span-2">
+                <x-button type="submit">
+                    {{ __('Simpan') }}
+                </x-button>
+            </div>
+        </form>
+        <x-validation-errors class="mt-4" />
+    </div>
 
 </x-app-layout>

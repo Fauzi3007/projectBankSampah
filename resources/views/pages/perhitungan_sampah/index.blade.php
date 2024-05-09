@@ -9,7 +9,7 @@
               <!-- Datepicker built with flatpickr -->
               <x-datepicker />
               <!-- Add view button -->
-              
+
           </div>
       </div>
       <!-- Cards -->
@@ -19,13 +19,18 @@
           </svg>
           <span class="ml-2">Tambah Perhitungan Sampah</span>
       </a>
+    @if(session('success'))
+        <div class="bg-green-500 text-white px-4 py-2 mt-4 rounded-md">
+            {{ session('success') }}
+        </div>
+    @endif
       <div class="grid grid-cols-12 gap-6 mt-2">
         <div class="col-span-full  bg-white dark:bg-slate-800 shadow-lg rounded-sm border border-slate-200 dark:border-slate-700">
             <header class="px-5 py-4 border-b border-slate-100 dark:border-slate-700">
                 <h2 class="font-semibold text-slate-800 dark:text-slate-100">Perhitungan Sampah</h2>
             </header>
             <div class="p-3">
-                
+
                 <!-- Table -->
                 <div class="overflow-x-auto">
                     <table class="table-auto w-full">
@@ -39,10 +44,10 @@
                                     <div class="font-semibold text-left">Tanggal</div>
                                 </th>
                                 <th class="p-2 whitespace-nowrap">
-                                    <div class="font-semibold text-left">Kategori</div>
+                                    <div class="font-semibold text-left">Sarana</div>
                                 </th>
                                 <th class="p-2 whitespace-nowrap">
-                                    <div class="font-semibold text-left">Sarana</div>
+                                    <div class="font-semibold text-left">Kategori</div>
                                 </th>
                                 <th class="p-2 whitespace-nowrap">
                                     <div class="font-semibold text-left">Jumlah</div>
@@ -62,10 +67,10 @@
                                         <div class="text-left">{{ $item->tanggal }}</div>
                                     </td>
                                     <td class="p-2 whitespace-nowrap">
-                                        <div class="text-left">{{$item->kategori->nama_kategori}}</div>
+                                        <div class="text-left">{{ $item->sarana->nama_sarana }}</div>
                                     </td>
                                     <td class="p-2 whitespace-nowrap">
-                                        <div class="text-left">{{ $item->sarana->nama_sarana }}</div>
+                                        <div class="text-left">{{$item->kategori->nama_kategori}}</div>
                                     </td>
                                     <td class="p-2 whitespace-nowrap">
                                         <div class="text-left">{{ $item->jumlah_sampah }}</div>
@@ -86,12 +91,12 @@
                                     </td>
                                 </tr>
                             @endforelse
-                     
+
                         </tbody>
                     </table>
-                
+
                 </div>
-            
+
             </div>
         </div>
       </div>

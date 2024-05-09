@@ -15,7 +15,7 @@ return new class extends Migration
             $table->increments('id_pengguna_sarana');
             $table->string('nama_pengguna', 50);
             $table->string('no_hp', 20);
-            $table->string('role', 20);
+            $table->foreign('id_akun')->references('id')->on('users');
             $table->timestamps();
         });
     }

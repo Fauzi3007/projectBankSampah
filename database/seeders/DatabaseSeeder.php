@@ -27,6 +27,7 @@ class DatabaseSeeder extends Seeder
         ]);
         User::factory()->create([
             'email' => 'pengguna@gmail.com',
+            'role' => 'pengguna'
         ]);
 
         Kategori::factory()->count(10)->create();

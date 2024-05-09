@@ -29,7 +29,7 @@ class UserFactory extends Factory
             'two_factor_recovery_codes' => null,
             'remember_token' => Str::random(10),
             'profile_photo_path' => null,
-            'role' => $this->faker->randomElement(['admin', 'mitra']),
+            'role' => $this->faker->randomElement(['admin', 'pengguna']),
         ];
     }
 
@@ -45,5 +45,5 @@ class UserFactory extends Factory
         });
     }
 
-   
+
 }
