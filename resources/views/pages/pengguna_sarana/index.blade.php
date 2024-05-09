@@ -9,7 +9,7 @@
               <!-- Datepicker built with flatpickr -->
               <x-datepicker />
               <!-- Add view button -->
-              
+
           </div>
       </div>
       <!-- Cards -->
@@ -17,15 +17,15 @@
           <svg class="w-4 h-4 fill-current opacity-50 shrink-0" viewBox="0 0 16 16">
               <path d="M15 7H9V1c0-.6-.4-1-1-1S7 .4 7 1v6H1c-.6 0-1 .4-1 1s.4 1 1 1h6v6c0 .6.4 1 1 1s1-.4 1-1V9h6c.6 0 1-.4 1-1s-.4-1-1-1z" />
           </svg>
-          <span class="ml-2">Tambah Mitra</span>
+          <span class="ml-2">Tambah Pengguna Sarana</span>
       </a>
       <div class="grid grid-cols-12 gap-6 mt-2">
         <div class="col-span-full bg-white dark:bg-slate-800 shadow-lg rounded-sm border border-slate-200 dark:border-slate-700">
             <header class="px-5 py-4 border-b border-slate-100 dark:border-slate-700">
-                <h2 class="font-semibold text-slate-800 dark:text-slate-100">Mitra</h2>
+                <h2 class="font-semibold text-slate-800 dark:text-slate-100">Pengguna Sarana</h2>
             </header>
             <div class="p-3">
-                
+
                 <!-- Table -->
                 <div class="overflow-x-auto">
                     <table class="table-auto w-full">
@@ -42,31 +42,37 @@
                                     <div class="font-semibold text-left">Nomor Telepon</div>
                                 </th>
                                 <th class="p-2 whitespace-nowrap">
+                                    <div class="font-semibold text-left">Role</div>
+                                </th>
+                                <th class="p-2 whitespace-nowrap">
                                     <div class="font-semibold text-center">Aksi</div>
                                 </th>
-                                
+
                             </tr>
                         </thead>
                         <!-- Table body -->
                         <tbody class="text-sm divide-y divide-slate-100 dark:divide-slate-700">
-                            @forelse ($mitras as $item) 
+                            @forelse ($pengguna_saranas as $item)
                             <tr>
-                                
+
                                 <td class="p-2 whitespace-nowrap">
                                     <div class="flex items-center">
-                                        
+
                                         <div class="font-medium text-slate-800">{{$loop->iteration}}</div>
                                     </div>
                                 </td>
                                 <td class="p-2 whitespace-nowrap">
-                                    <div class="text-left">{{$item->nama_admin}}</div>
+                                    <div class="text-left">{{$item->nama_pengguna}}</div>
                                 </td>
                                 <td class="p-2 whitespace-nowrap">
                                     <div class="text-left">{{$item->no_hp}}</div>
                                 </td>
+                                <td class="p-2 whitespace-nowrap">
+                                    <div class="text-left">{{$item->role}}</div>
+                                </td>
                                 <td class="p-2 whitespace-nowrap flex justify-center items-center gap-1">
-                                    <a href="{{route('mitra.edit',$item->id_mitra)}}" class="px-4 py-2 rounded-md bg-yellow-300 hover:bg-yellow-400 text-white sm:mt-0">Edit</a>
-                                    <form action="{{route('mitra.destroy',$item->id_mitra)}}" method="post" class="d-inline">
+                                    <a href="{{route('pengguna_sarana.edit',$item->id_pengguna_sarana)}}" class="px-4 py-2 rounded-md bg-yellow-300 hover:bg-yellow-400 text-white sm:mt-0">Edit</a>
+                                    <form action="{{route('pengguna_sarana.destroy',$item->id_pengguna_sarana)}}" method="post" class="d-inline">
                                         @method('DELETE')
                                         @csrf
                                         <button type="submit" class="p-2 rounded-md bg-red-600 hover:bg-red-500 text-white sm:mt-0" onclick="return confirm('Yakin akan menghapus data?')"> Hapus </button>
@@ -82,9 +88,9 @@
 
                         </tbody>
                     </table>
-                
+
                 </div>
-            
+
             </div>
         </div>
       </div>

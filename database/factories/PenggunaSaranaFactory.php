@@ -7,7 +7,7 @@ use Illuminate\Database\Eloquent\Factories\Factory;
 /**
  * @extends \Illuminate\Database\Eloquent\Factories\Factory<\App\Models\Mitra>
  */
-class MitraFactory extends Factory
+class PenggunaSaranaFactory extends Factory
 {
     /**
      * Define the model's default state.
@@ -17,8 +17,9 @@ class MitraFactory extends Factory
     public function definition(): array
     {
         return [
-            'nama_admin' => $this->faker->name('id_ID'),
+            'nama_pengguna' => $this->faker->name('id_ID'),
             'no_hp' => $this->faker->phoneNumber('id_ID'),
+            'role' => 'staff',
         ];
     }
 }

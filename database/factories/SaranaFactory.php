@@ -20,7 +20,7 @@ class SaranaFactory extends Factory
             'nama_sarana' => $this->faker->name("id_ID"),
             'alamat_sarana' => $this->faker->address("id_ID"),
             'jenis_sarana' => $this->faker->randomElement(['Bank Sampah', 'Pembuangan Akhir', 'Tong Sampah']),
-            'mitra_id_mitra' => \App\Models\Mitra::factory()->create()->id_mitra,
+            'pengguna_sarana_id_pengguna_sarana' => \App\Models\PenggunaSarana::factory()->create()->id_pengguna_sarana,
         ];
     }
 }

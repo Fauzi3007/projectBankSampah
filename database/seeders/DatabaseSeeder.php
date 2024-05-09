@@ -4,6 +4,7 @@ namespace Database\Seeders;
 
 use App\Models\Kategori;
 use App\Models\Mitra;
+use App\Models\PenggunaSarana;
 use App\Models\PerhitunganSampah;
 use App\Models\Sarana;
 use App\Models\User;
@@ -25,13 +26,13 @@ class DatabaseSeeder extends Seeder
             'role' => 'admin'
         ]);
         User::factory()->create([
-            'email' => 'mitra@gmail.com',
+            'email' => 'pengguna@gmail.com',
         ]);
 
         Kategori::factory()->count(10)->create();
-        Mitra::factory()->count(10)->create();
+        PenggunaSarana::factory()->count(10)->create();
         PerhitunganSampah::factory()->count(10)->create();
         Sarana::factory()->count(10)->create();
-        
+
     }
 }

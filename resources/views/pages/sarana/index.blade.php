@@ -9,7 +9,7 @@
               <!-- Datepicker built with flatpickr -->
               <x-datepicker />
               <!-- Add view button -->
-              
+
           </div>
       </div>
       <!-- Cards -->
@@ -25,7 +25,7 @@
                 <h2 class="font-semibold text-slate-800 dark:text-slate-100">Sarana</h2>
             </header>
             <div class="p-3">
-                
+
                 <!-- Table -->
                 <div class="overflow-x-auto">
                     <table class="table-auto w-full">
@@ -45,7 +45,7 @@
                                     <div class="font-semibold text-left">Jenis Sarana</div>
                                 </th>
                                 <th class="p-2 whitespace-nowrap">
-                                    <div class="font-semibold text-left">Mitra</div>
+                                    <div class="font-semibold text-left">Pengguna Sarana</div>
                                 </th>
                                 <th class="p-2 whitespace-nowrap">
                                     <div class="font-semibold text-center">Aksi</div>
@@ -55,11 +55,11 @@
                         <!-- Table body -->
                         <tbody class="text-sm divide-y divide-slate-100 dark:divide-slate-700">
                             <tr>
-                                @forelse ($saranas as $item) 
-                                
+                                @forelse ($saranas as $item)
+
                                 <td class="p-2 whitespace-nowrap">
                                     <div class="flex items-center">
-                                        
+
                                         <div class="font-medium text-slate-800">{{$loop->iteration}}</div>
                                     </div>
                                 </td>
@@ -73,7 +73,7 @@
                                     <div class="text-left">{{$item->jenis_sarana}}</div>
                                 </td>
                                 <td class="p-2 whitespace-nowrap">
-                                    <div class="text-left">{{$item->mitra->nama_admin}}</div>
+                                    <div class="text-left">{{$item->pengguna->nama_pengguna}}</div>
                                 </td>
                                 <td class="p-2 whitespace-nowrap flex justify-center items-center gap-1">
                                     <a href="{{route('sarana.edit',$item->id_sarana)}}" class="px-4 py-2 rounded-md bg-yellow-300 hover:bg-yellow-400 text-white sm:mt-0">Edit</a>
@@ -94,9 +94,9 @@
 
                         </tbody>
                     </table>
-                
+
                 </div>
-            
+
             </div>
         </div>
       </div>
