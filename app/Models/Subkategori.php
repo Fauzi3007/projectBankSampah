@@ -10,7 +10,7 @@ class Subkategori extends Model
     use HasFactory;
     protected $table = 'subkategoris';
     protected $primaryKey = 'id_subkategori';
-    protected $fillable = ['nama_subkategori'];
+    protected $fillable = ['nama_subkategori','kategori_id_kategori'];
     public $timestamps = true;
 
 

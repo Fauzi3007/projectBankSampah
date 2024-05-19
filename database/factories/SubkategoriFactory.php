@@ -5,7 +5,7 @@ namespace Database\Factories;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
 /**
- * @extends \Illuminate\Database\Eloquent\Factories\Factory<\App\Models\Model>
+ * @extends \Illuminate\Database\Eloquent\Factories\Factory<\App\Models\Subkategori>
  */
 class SubkategoriFactory extends Factory
 {
@@ -17,8 +17,7 @@ class SubkategoriFactory extends Factory
     public function definition(): array
     {
         return [
-            'nama_subkategori' => $this->faker->name(),
-
+            'nama_subkategori' => $this->faker->word,
         ];
     }
 }

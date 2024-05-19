@@ -11,10 +11,10 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('subkategoris', function (Blueprint $table) {
-            $table->increments('id_subkategori');
-            $table->string('nama_subkategori', 50);
-            $table->unsignedInteger('kategori_id_kategori')->references('id_kategori')->on('kategoris');
+        Schema::create('kotas', function (Blueprint $table) {
+            $table->increments('id_kota');
+            $table->string('nama_kota', 50);
+            $table->unsignedInteger('provinsi_id_provinsi')->references('id_provinsi')->on('provinsis');
             $table->timestamps();
         });
     }
@@ -24,6 +24,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('subkategoris');
+        Schema::dropIfExists('kotas');
     }
 };

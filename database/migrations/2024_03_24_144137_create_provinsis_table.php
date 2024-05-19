@@ -11,10 +11,9 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('subkategoris', function (Blueprint $table) {
-            $table->increments('id_subkategori');
-            $table->string('nama_subkategori', 50);
-            $table->unsignedInteger('kategori_id_kategori')->references('id_kategori')->on('kategoris');
+        Schema::create('provinsis', function (Blueprint $table) {
+            $table->increments('id_provinsi');
+            $table->string('nama_provinsi', 50);
             $table->timestamps();
         });
     }
@@ -24,6 +23,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('subkategoris');
+        Schema::dropIfExists('provinsis');
     }
 };
