@@ -27,7 +27,10 @@ class PerhitunganSampahFactory extends Factory
             'kategori_id_kategori' => function () {
                 return Kategori::factory()->create()->id_kategori;
             },
-                
+            'user_id_user' => function () {
+                return \App\Models\User::factory()->create()->id;
+            },
+
         ];
     }
 }

@@ -11,10 +11,14 @@ class PerhitunganSampah extends Model
 
     protected $table = 'perhitungan_sampahs';
     protected $primaryKey = 'id_perhitungan_sampah';
-    protected $fillable = ['tanggal', 'kategori_id_kategori', 'jumlah_sampah', 'sarana_id_sarana'];
+    protected $fillable = ['tanggal', 'kategori_id_kategori', 'jumlah_sampah', 'sarana_id_sarana', 'user_id_user'];
     public $timestamps = true;
 
     public function kategori() { return $this->belongsTo(Kategori::class, 'kategori_id_kategori'); }
 
     public function sarana() { return $this->belongsTo(Sarana::class, 'sarana_id_sarana'); }
+
+    public function user() { return $this->belongsTo(User::class, 'user_id_user'); }
+
+    public function provinsi() { return $this->belongsTo(Provinsi::class, 'provinsi_id_provinsi'); }
 }

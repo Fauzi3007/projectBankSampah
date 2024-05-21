@@ -5,9 +5,9 @@ namespace Database\Factories;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
 /**
- * @extends \Illuminate\Database\Eloquent\Factories\Factory<\App\Models\Subkategori>
+ * @extends \Illuminate\Database\Eloquent\Factories\Factory<\App\Models\Kota>
  */
-class SubkategoriFactory extends Factory
+class KotaFactory extends Factory
 {
     /**
      * Define the model's default state.
@@ -17,8 +17,8 @@ class SubkategoriFactory extends Factory
     public function definition(): array
     {
         return [
-            'nama_subkategori' => $this->faker->word,
-            'kategori_id_kategori' => \App\Models\Kategori::factory()->create()->id_kategori,
+            'nama_kota' => $this->faker->city('id_ID'),
+            'provinsi_id_provinsi' => \App\Models\Provinsi::factory()->create()->id_provinsi,
         ];
     }
 }

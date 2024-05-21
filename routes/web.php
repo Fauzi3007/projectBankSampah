@@ -6,6 +6,7 @@ use App\Http\Controllers\ExcelUploadController;
 use App\Http\Controllers\KategoriController;
 use App\Http\Controllers\PenggunaSaranaController;
 use App\Http\Controllers\PerhitunganSampahController;
+use App\Http\Controllers\ProvinsiController;
 use App\Http\Controllers\SaranaController;
 use Illuminate\Support\Facades\Response;
 
@@ -64,6 +65,28 @@ Route::middleware(['auth:sanctum', 'verified'])->group(function () {
     Route::put('pengguna_sarana/{pengguna_sarana}', [PenggunaSaranaController::class, 'update'])->name('pengguna_sarana.update');
     Route::delete('pengguna_sarana/{pengguna_sarana}', [PenggunaSaranaController::class, 'destroy'])->name('pengguna_sarana.destroy')->middleware('admin');
     Route::post('excel-upload', [ExcelUploadController::class, 'index'])->name('excel.upload');
+
+    // Provinsi
+    Route::get('provinsi', [ProvinsiController::class, 'index'])->name('provinsi.index');
+    Route::post('provinsi', [ProvinsiController::class, 'store'])->name('provinsi.store');
+    Route::get('provinsi/create', [ProvinsiController::class, 'create'])->name('provinsi.create');
+    Route::get('provinsi/{provinsi}', [ProvinsiController::class, 'show'])->name('provinsi.show');
+    Route::get('provinsi/{provinsi}/edit', [ProvinsiController::class, 'edit'])->name('provinsi.edit');
+    Route::put('provinsi/{provinsi}', [ProvinsiController::class, 'update'])->name('provinsi.update');
+    Route::delete('provinsi/{provinsi}', [ProvinsiController::class, 'destroy'])->name('provinsi.destroy');
+
+    // Subkategori
+    // Route::get('subkategori', [SubkategoriController::class, 'index'])->name('subkategori.index');
+    // Route::post('subkategori', [SubkategoriController::class, 'store'])->name('subkategori.store');
+    // Route::get('subkategori/create', [SubkategoriController::class, 'create'])->name('subkategori.create');
+    // Route::get('subkategori/{subkategori}', [SubkategoriController::class, 'show'])->name('subkategori.show');
+    // Route::get('subkategori/{subkategori}/edit', [SubkategoriController::class, 'edit'])->name('subkategori.edit');
+    // Route::put('subkategori/{subkategori}', [SubkategoriController::class, 'update'])->name('subkategori.update');
+    // Route::delete('subkategori/{subkategori}', [SubkategoriController::class, 'destroy'])->name('subkategori.destroy');
+
+    // Filter Data Dashboard
+    Route::post('/filter-data', [DashboardController::class, 'filterData'])->name('filter');
+
 
     Route::fallback(function() {
         return view('pages/utility/404');

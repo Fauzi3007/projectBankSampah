@@ -15,6 +15,11 @@ class Kategori extends Model
     public $timestamps = true;
 
     public function perhitunganSampah() { return $this->hasMany(PerhitunganSampah::class, 'kategori_id_kategori'); }
-    
+
+    public function subkategoris()
+    {
+        return $this->hasMany(Subkategori::class, 'kategori_id_kategori');
+    }
+
 
 }

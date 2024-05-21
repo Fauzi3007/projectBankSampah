@@ -13,5 +13,10 @@ class Subkategori extends Model
     protected $fillable = ['nama_subkategori','kategori_id_kategori'];
     public $timestamps = true;
 
+    public function kategori()
+    {
+        return $this->belongsTo(Kategori::class, 'kategori_id_kategori');
+    }
+
 
 }

@@ -13,11 +13,11 @@
           </div>
       </div>
       <!-- Cards -->
-      <a href="{{route('pengguna_sarana.create')}}" class="btn bg-indigo-500 hover:bg-indigo-600 text-white">
+      <a href="{{route('kategori.create')}}" class="btn bg-indigo-500 hover:bg-indigo-600 text-white">
           <svg class="w-4 h-4 fill-current opacity-50 shrink-0" viewBox="0 0 16 16">
               <path d="M15 7H9V1c0-.6-.4-1-1-1S7 .4 7 1v6H1c-.6 0-1 .4-1 1s.4 1 1 1h6v6c0 .6.4 1 1 1s1-.4 1-1V9h6c.6 0 1-.4 1-1s-.4-1-1-1z" />
           </svg>
-          <span class="ml-2">Tambah Pengguna Sarana</span>
+          <span class="ml-2">Tambah Kategori</span>
       </a>
       @if(session('success'))
       <div class="bg-green-500 text-white px-4 py-2 mt-4 rounded-md">
@@ -25,9 +25,9 @@
       </div>
   @endif
       <div class="grid grid-cols-12 gap-6 mt-2">
-        <div class="col-span-full bg-white dark:bg-slate-800 shadow-lg rounded-sm border border-slate-200 dark:border-slate-700">
+        <div class="col-span-full  bg-white dark:bg-slate-800 shadow-lg rounded-sm border border-slate-200 dark:border-slate-700">
             <header class="px-5 py-4 border-b border-slate-100 dark:border-slate-700">
-                <h2 class="font-semibold text-slate-800 dark:text-slate-100">Pengguna Sarana</h2>
+                <h2 class="font-semibold text-slate-800 dark:text-slate-100">Kategori</h2>
             </header>
             <div class="p-3">
 
@@ -41,13 +41,7 @@
                                     <div class="font-semibold text-left">No</div>
                                 </th>
                                 <th class="p-2 whitespace-nowrap">
-                                    <div class="font-semibold text-left">Nama Pengguna</div>
-                                </th>
-                                <th class="p-2 whitespace-nowrap">
-                                    <div class="font-semibold text-left">Nomor Telepon</div>
-                                </th>
-                                <th class="p-2 whitespace-nowrap">
-                                    <div class="font-semibold text-left">Role</div>
+                                    <div class="font-semibold text-left">Nama Kategori</div>
                                 </th>
                                 <th class="p-2 whitespace-nowrap">
                                     <div class="font-semibold text-center">Aksi</div>
@@ -57,8 +51,8 @@
                         </thead>
                         <!-- Table body -->
                         <tbody class="text-sm divide-y divide-slate-100 dark:divide-slate-700">
-                            @forelse ($pengguna_saranas as $item)
                             <tr>
+                                @forelse ($kategoris as $item)
 
                                 <td class="p-2 whitespace-nowrap">
                                     <div class="flex items-center">
@@ -67,35 +61,31 @@
                                     </div>
                                 </td>
                                 <td class="p-2 whitespace-nowrap">
-                                    <div class="text-left">{{$item->nama_pengguna}}</div>
-                                </td>
-                                <td class="p-2 whitespace-nowrap">
-                                    <div class="text-left">{{$item->no_hp}}</div>
-                                </td>
-                                <td class="p-2 whitespace-nowrap">
-                                    <div class="text-left">{{$item->user->role}}</div>
+                                    <div class="text-left">{{$item->nama_kategori}}</div>
                                 </td>
                                 <td class="p-2 whitespace-nowrap flex justify-center items-center gap-1">
-                                    <a href="{{route('pengguna_sarana.edit',$item->id_pengguna_sarana)}}" class="px-4 py-2 rounded-md bg-yellow-300 hover:bg-yellow-400 text-white sm:mt-0">Edit</a>
-                                    <form action="{{route('pengguna_sarana.destroy',$item->id_pengguna_sarana)}}" method="post" class="d-inline">
+                                    <a href="{{route('kategori.edit',$item->id_kategori)}}" class="px-4 py-2 rounded-md bg-yellow-300 hover:bg-yellow-400 text-white sm:mt-0">Edit</a>
+                                    <form action="{{route('kategori.destroy',$item->id_kategori)}}" method="post" class="d-inline">
                                         @method('DELETE')
                                         @csrf
                                         <button type="submit" class="p-2 rounded-md bg-red-600 hover:bg-red-500 text-white sm:mt-0" onclick="return confirm('Yakin akan menghapus data?')"> Hapus </button>
                                     </form>
                                 </td>
-                                @empty
+
+                            </tr>
+                            @empty
                                 <tr>
-                                    <td class="p-2 whitespace-nowrap" colspan="3">
+                                    <td class="p-2 whitespace-nowrap" colspan="2">
                                         <div class="text-sm text-center text-slate-500 dark:text-slate-400">No Data found</div>
                                     </td>
                                 </tr>
-                                @endforelse
+                            @endforelse
 
                         </tbody>
                     </table>
                     <!-- Pagination -->
                     <div class="mt-4">
-                        {{ $pengguna_saranas->links() }}
+                        {{ $kategoris->links() }}
                     </div>
 
                 </div>

@@ -13,4 +13,9 @@ class Provinsi extends Model
     protected $primaryKey = 'id_provinsi';
     protected $fillable = ['nama_provinsi'];
     public $timestamps = true;
+
+    public function kotas()
+    {
+        return $this->hasMany(Kota::class, 'provinsi_id_provinsi');
+    }
 }

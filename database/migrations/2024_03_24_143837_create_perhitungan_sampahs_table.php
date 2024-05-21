@@ -16,7 +16,8 @@ return new class extends Migration
             $table->date('tanggal');
             $table->unsignedInteger('kategori_id_kategori')->references('id_kategori')->on('kategoris');
             $table->integer('jumlah_sampah');
-            $table->unsignedInteger('sarana_id_sarana')->references('id_sarana')->on('saranas');    
+            $table->unsignedInteger('sarana_id_sarana')->references('id_sarana')->on('saranas');
+            $table->unsignedInteger('user_id_user')->references('id')->on('users');
             $table->timestamps();
         });
     }
