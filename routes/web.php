@@ -8,6 +8,7 @@ use App\Http\Controllers\PenggunaSaranaController;
 use App\Http\Controllers\PerhitunganSampahController;
 use App\Http\Controllers\ProvinsiController;
 use App\Http\Controllers\SaranaController;
+use App\Http\Controllers\SubkategoriController;
 use Illuminate\Support\Facades\Response;
 
 
@@ -76,13 +77,13 @@ Route::middleware(['auth:sanctum', 'verified'])->group(function () {
     Route::delete('provinsi/{provinsi}', [ProvinsiController::class, 'destroy'])->name('provinsi.destroy');
 
     // Subkategori
-    // Route::get('subkategori', [SubkategoriController::class, 'index'])->name('subkategori.index');
-    // Route::post('subkategori', [SubkategoriController::class, 'store'])->name('subkategori.store');
-    // Route::get('subkategori/create', [SubkategoriController::class, 'create'])->name('subkategori.create');
-    // Route::get('subkategori/{subkategori}', [SubkategoriController::class, 'show'])->name('subkategori.show');
-    // Route::get('subkategori/{subkategori}/edit', [SubkategoriController::class, 'edit'])->name('subkategori.edit');
-    // Route::put('subkategori/{subkategori}', [SubkategoriController::class, 'update'])->name('subkategori.update');
-    // Route::delete('subkategori/{subkategori}', [SubkategoriController::class, 'destroy'])->name('subkategori.destroy');
+    Route::get('subkategori', [SubkategoriController::class, 'index'])->name('subkategori.index');
+    Route::post('subkategori', [SubkategoriController::class, 'store'])->name('subkategori.store');
+    Route::get('subkategori/create', [SubkategoriController::class, 'create'])->name('subkategori.create');
+    Route::get('subkategori/{subkategori}', [SubkategoriController::class, 'show'])->name('subkategori.show');
+    Route::get('subkategori/{subkategori}/edit', [SubkategoriController::class, 'edit'])->name('subkategori.edit');
+    Route::put('subkategori/{subkategori}', [SubkategoriController::class, 'update'])->name('subkategori.update');
+    Route::delete('subkategori/{subkategori}', [SubkategoriController::class, 'destroy'])->name('subkategori.destroy');
 
     // Filter Data Dashboard
     Route::post('/filter-data', [DashboardController::class, 'filterData'])->name('filter');

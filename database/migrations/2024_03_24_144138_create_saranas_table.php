@@ -17,7 +17,6 @@ return new class extends Migration
             $table->string('alamat_sarana', 100);
             $table->unsignedInteger('provinsi_id_provinsi')->references('id_provinsi')->on('provinsis');
             $table->string('jenis_sarana', 50);
-            $table->unsignedInteger('pengguna_sarana_id_pengguna_sarana')->references('id_pengguna_sarana')->on('pengguna_saranas');
             $table->timestamps();
         });
     }

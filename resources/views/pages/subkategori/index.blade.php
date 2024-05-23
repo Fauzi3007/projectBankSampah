@@ -17,7 +17,7 @@
           <svg class="w-4 h-4 fill-current opacity-50 shrink-0" viewBox="0 0 16 16">
               <path d="M15 7H9V1c0-.6-.4-1-1-1S7 .4 7 1v6H1c-.6 0-1 .4-1 1s.4 1 1 1h6v6c0 .6.4 1 1 1s1-.4 1-1V9h6c.6 0 1-.4 1-1s-.4-1-1-1z" />
           </svg>
-          <span class="ml-2">Tambah Kategori</span>
+          <span class="ml-2">Tambah Subkategori</span>
       </a>
       @if(session('success'))
       <div class="bg-green-500 text-white px-4 py-2 mt-4 rounded-md">
@@ -41,7 +41,10 @@
                                     <div class="font-semibold text-left">No</div>
                                 </th>
                                 <th class="p-2 whitespace-nowrap">
-                                    <div class="font-semibold text-left">Nama Kategori</div>
+                                    <div class="font-semibold text-left">Nama Subkategori</div>
+                                </th>
+                                <th class="p-2 whitespace-nowrap">
+                                    <div class="font-semibold text-left">Kategori</div>
                                 </th>
                                 <th class="p-2 whitespace-nowrap">
                                     <div class="font-semibold text-center">Aksi</div>
@@ -52,7 +55,7 @@
                         <!-- Table body -->
                         <tbody class="text-sm divide-y divide-slate-100 dark:divide-slate-700">
                             <tr>
-                                @forelse ($kategoris as $item)
+                                @forelse ($subkategoris as $item)
 
                                 <td class="p-2 whitespace-nowrap">
                                     <div class="flex items-center">
@@ -61,11 +64,14 @@
                                     </div>
                                 </td>
                                 <td class="p-2 whitespace-nowrap">
-                                    <div class="text-left">{{$item->nama_kategori}}</div>
+                                    <div class="text-left">{{$item->nama_subkategori}}</div>
+                                </td>
+                                <td class="p-2 whitespace-nowrap">
+                                    <div class="text-left">{{$item->kategori->nama_kategori}}</div>
                                 </td>
                                 <td class="p-2 whitespace-nowrap flex justify-center items-center gap-1">
-                                    <a href="{{route('kategori.edit',$item->id_kategori)}}" class="px-4 py-2 rounded-md bg-yellow-300 hover:bg-yellow-400 text-white sm:mt-0">Edit</a>
-                                    <form action="{{route('kategori.destroy',$item->id_kategori)}}" method="post" class="d-inline">
+                                    <a href="{{route('subkategori.edit',$item->id_subkategori)}}" class="px-4 py-2 rounded-md bg-yellow-300 hover:bg-yellow-400 text-white sm:mt-0">Edit</a>
+                                    <form action="{{route('subkategori.destroy',$item->id_subkategori)}}" method="post" class="d-inline">
                                         @method('DELETE')
                                         @csrf
                                         <button type="submit" class="p-2 rounded-md bg-red-600 hover:bg-red-500 text-white sm:mt-0" onclick="return confirm('Yakin akan menghapus data?')"> Hapus </button>

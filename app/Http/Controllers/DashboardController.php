@@ -40,7 +40,7 @@ class DashboardController extends Controller
         }
 
         // Data for bar chart: total amount of waste per category in each province
-        $barChartData = PerhitunganSampah::join('saranas','perhitungan_sampahs.sarana_id_sarana','=','saranas.id_sarana')->select('saranas.provinsi_id_provinsi', 'kategori_id_kategori', FacadesDB::raw('SUM(jumlah_sampah) as total_sampah'))
+        $barChartData = PerhitunganSampah::join('saranas', 'perhitungan_sampahs.sarana_id_sarana', '=', 'saranas.id_sarana')->select('saranas.provinsi_id_provinsi', 'kategori_id_kategori', FacadesDB::raw('SUM(jumlah_sampah) as total_sampah'))
             ->groupBy('saranas.provinsi_id_provinsi', 'kategori_id_kategori')
             ->where('jumlah_sampah', '!=', null)
             ->with('provinsi', 'kategori')
@@ -57,11 +57,10 @@ class DashboardController extends Controller
         $provinsis = Provinsi::with('kotas')->get();
         $kategoris = Kategori::with('subkategoris')->get();
 
-        $filterTanggal = $request->filled('selectedTanggal') ? $request->input('selectedTanggal') : null;
-        $filterUser = $request->filled('selectedUser') ? $request->input('selectedUser') : null;
-        $filterProvinsi = $request->filled('selectedJenis') ? $request->input('selectedJenis') : null;
-        $filterKategori = $request->filled('selectedProvinsi') ? $request->input('selectedProvinsi') : null;
-
+        $filterTanggal = $request->input('selectedTanggal');
+        $filterUser = $request->input('selectedUser');
+        $filterProvinsi = $request->input('selectedProvinsi');
+        $filterKategori = $request->input('selectedJenis');
 
         // Data for stacked bar chart: total amount of waste per category created by each user
         $stackedBarData = PerhitunganSampah::select('user_id_user', 'kategori_id_kategori', FacadesDB::raw('SUM(jumlah_sampah) as total_sampah'))
@@ -69,10 +68,14 @@ class DashboardController extends Controller
             ->with('user', 'kategori')
             ->when($filterTanggal, function ($query) use ($filterTanggal) {
                 $dates = explode(' to ', $filterTanggal);
-                return $query->whereBetween('tanggal', [$dates[0], $dates[1]]);
+                if (count($dates) > 1) {
+                    return $query->whereBetween('tanggal', [$dates[0], $dates[1]]);
+                } else {
+                    return $query->where('tanggal', $dates[0]);
+                }
             })
             ->when($filterUser, function ($query) use ($filterUser) {
-                return $query->where('user_id_user', $filterUser);
+                return $query->whereIn('user_id_user', $filterUser);
             })
             ->get()
             ->groupBy('user_id_user');
@@ -83,7 +86,11 @@ class DashboardController extends Controller
             ->with('kategori')
             ->when($filterTanggal, function ($query) use ($filterTanggal) {
                 $dates = explode(' to ', $filterTanggal);
-                return $query->whereBetween('tanggal', [$dates[0], $dates[1]]);
+                if (count($dates) > 1) {
+                    return $query->whereBetween('tanggal', [$dates[0], $dates[1]]);
+                } else {
+                    return $query->where('tanggal', $dates[0]);
+                }
             })
             ->get();
 
@@ -93,25 +100,27 @@ class DashboardController extends Controller
         }
 
         // Data for bar chart: total amount of waste per category in each province
-        $barChartData = PerhitunganSampah::join('saranas','perhitungan_sampahs.sarana_id_sarana','=','saranas.id_sarana')->select('saranas.provinsi_id_provinsi', 'kategori_id_kategori', FacadesDB::raw('SUM(jumlah_sampah) as total_sampah'))
+        $barChartData = PerhitunganSampah::join('saranas', 'perhitungan_sampahs.sarana_id_sarana', '=', 'saranas.id_sarana')->select('saranas.provinsi_id_provinsi', 'kategori_id_kategori', FacadesDB::raw('SUM(jumlah_sampah) as total_sampah'))
             ->groupBy('saranas.provinsi_id_provinsi', 'kategori_id_kategori')
             ->where('jumlah_sampah', '!=', null)
             ->with('provinsi', 'kategori')
             ->when($filterTanggal, function ($query) use ($filterTanggal) {
                 $dates = explode(' to ', $filterTanggal);
-                return $query->whereBetween('tanggal', [$dates[0], $dates[1]]);
+                if (count($dates) > 1) {
+                    return $query->whereBetween('tanggal', [$dates[0], $dates[1]]);
+                } else {
+                    return $query->where('tanggal', $dates[0]);
+                }
             })
             ->when($filterProvinsi, function ($query) use ($filterProvinsi) {
-                return $query->where('provinsi_id_provinsi', $filterProvinsi);
+                return $query->whereIn('provinsi_id_provinsi', $filterProvinsi);
             })
             ->when($filterKategori, function ($query) use ($filterKategori) {
-                return $query->where('kategori_id_kategori', $filterKategori);
+                return $query->whereIn('kategori_id_kategori', $filterKategori);
             })
             ->get()
             ->groupBy('provinsi_id_provinsi');
 
-
         return view('pages.dashboard.dashboard', compact('users', 'provinsis', 'kategoris', 'stackedBarData', 'pieChartData', 'barChartData'));
     }
-
 }

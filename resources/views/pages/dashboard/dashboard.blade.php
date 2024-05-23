@@ -60,7 +60,7 @@
                                             <div class="grid grid-cols-3 gap-1">
                                                 @foreach ($users as $item)
                                                     <label class="inline-flex items-center">
-                                                        <input type="checkbox" name="selectedProvinsi[]"
+                                                        <input type="checkbox" name="selectedUser[]"
                                                             value="{{ $item->id }}" class="form-checkbox">
                                                         <span
                                                             class="ml-2">{{ Str::limit(ucwords($item->name), 10, '..') }}</span>
@@ -140,7 +140,7 @@
                                             <div class="grid grid-cols-3 gap-1">
                                                 @foreach ($kategoris as $item)
                                                     <label class="inline-flex items-center">
-                                                        <input type="checkbox" name="selectedUser[]"
+                                                        <input type="checkbox" name="selectedJenis[]"
                                                             value="{{ $item->id_kategori }}" class="form-checkbox">
                                                         <span class="ml-2">{{ ucwords($item->nama_kategori) }}</span>
                                                     </label>
@@ -218,7 +218,7 @@
                                             <div class="grid grid-cols-3 gap-1">
                                                 @foreach ($provinsis as $item)
                                                     <label class="inline-flex items-center">
-                                                        <input type="checkbox" name="selectedJenis[]"
+                                                        <input type="checkbox" name="selectedProvinsi[]"
                                                             value="{{ $item->id_provinsi }}" class="form-checkbox">
                                                         <span class="ml-2">{{ ucwords($item->nama_provinsi) }}</span>
                                                     </label>

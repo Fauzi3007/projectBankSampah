@@ -14,8 +14,8 @@ class Provinsi extends Model
     protected $fillable = ['nama_provinsi'];
     public $timestamps = true;
 
-    public function kotas()
+    public function sarana()
     {
-        return $this->hasMany(Kota::class, 'provinsi_id_provinsi');
+        return $this->hasMany(Sarana::class, 'provinsi_id_provinsi');
     }
 }
