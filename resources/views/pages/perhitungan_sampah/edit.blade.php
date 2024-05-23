@@ -6,6 +6,9 @@
         @csrf
       <div class="grid grid-cols-1 gap-6 sm:grid-cols-2">
 
+        <input type="text" name="user_id_user" value="{{$perhitunganSampah->user_id_user}}" hidden>
+
+
           <x-label for="tanggal">{{ __('Tanggal') }} </x-label>
           <x-input id="tanggal" type="text" name="tanggal" :value="old('tanggal',$perhitunganSampah->tanggal)"
               required />

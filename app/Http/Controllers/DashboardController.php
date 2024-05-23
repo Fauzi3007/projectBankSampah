@@ -5,11 +5,9 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\User;
 use App\Models\Provinsi;
-use App\Models\Kota;
 use App\Models\Kategori;
 use App\Models\SubKategori;
 use App\Models\PerhitunganSampah;
-use DB;
 use Illuminate\Support\Facades\DB as FacadesDB;
 
 class DashboardController extends Controller
@@ -20,6 +18,7 @@ class DashboardController extends Controller
         $users = User::all();
         $provinsis = Provinsi::with('kotas')->get();
         $kategoris = Kategori::with('subkategoris')->get();
+        $subkategoris = SubKategori::all();
 
         // Data for stacked bar chart: total amount of waste per category created by each user
         $stackedBarData = PerhitunganSampah::select('user_id_user', 'kategori_id_kategori', FacadesDB::raw('SUM(jumlah_sampah) as total_sampah'))
@@ -56,11 +55,13 @@ class DashboardController extends Controller
         $users = User::all();
         $provinsis = Provinsi::with('kotas')->get();
         $kategoris = Kategori::with('subkategoris')->get();
+        $subkategoris = SubKategori::all();
 
         $filterTanggal = $request->input('selectedTanggal');
         $filterUser = $request->input('selectedUser');
         $filterProvinsi = $request->input('selectedProvinsi');
         $filterKategori = $request->input('selectedJenis');
+        $filterSubkategori = $request->input('selectedSubjenis');
 
         // Data for stacked bar chart: total amount of waste per category created by each user
         $stackedBarData = PerhitunganSampah::select('user_id_user', 'kategori_id_kategori', FacadesDB::raw('SUM(jumlah_sampah) as total_sampah'))
@@ -92,6 +93,9 @@ class DashboardController extends Controller
                     return $query->where('tanggal', $dates[0]);
                 }
             })
+            ->when($filterSubkategori, function ($query) use ($filterSubkategori) {
+                return $query->whereIn('subkategori_id_subkategori', $filterSubkategori);
+            })
             ->get();
 
         $totalSampah = $pieChartData->sum('total_sampah');
@@ -118,9 +122,12 @@ class DashboardController extends Controller
             ->when($filterKategori, function ($query) use ($filterKategori) {
                 return $query->whereIn('kategori_id_kategori', $filterKategori);
             })
+            ->when($filterSubkategori, function ($query) use ($filterSubkategori) {
+                return $query->whereIn('subkategori_id_subkategori', $filterSubkategori);
+            })
             ->get()
             ->groupBy('provinsi_id_provinsi');
 
-        return view('pages.dashboard.dashboard', compact('users', 'provinsis', 'kategoris', 'stackedBarData', 'pieChartData', 'barChartData'));
+        return view('pages.dashboard.dashboard', compact('users', 'provinsis', 'kategoris', 'subkategoris', 'stackedBarData', 'pieChartData', 'barChartData'));
     }
 }

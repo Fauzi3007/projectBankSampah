@@ -18,6 +18,7 @@ class ExcelUploadController extends Controller
     {
         $tanggal = $request->filled('tanggal') ? $request->input('tanggal') : Carbon::now();
         $sarana = $request->filled('sarana_id_sarana') ? $request->input('sarana_id_sarana') : 0;
+        $user = $request->filled('user_id_user') ? $request->input('user_id_user') : 0;
 
         $request->validate([
             'excel_file' => 'required',
@@ -54,7 +55,7 @@ class ExcelUploadController extends Controller
             'kategori_id_kategori' => $existingKategori->id_kategori,
             'subkategori_id_subkategori' => $existingSubkategori->id_subkategori,
             'jumlah_sampah' => $jumlahSampah,
-            'user_id_user' => Auth::user()->id,
+            'user_id_user' => $user,
             ]);
 
             $row++;

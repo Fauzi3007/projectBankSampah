@@ -51,6 +51,7 @@
             <form action="{{route('perhitungan_sampah.store')}}" method="post" class="grid grid-cols-2 gap-6 mt-2">
                 @csrf
               <div class="grid grid-cols-1 gap-6 sm:grid-cols-2">
+                <input type="text" name="user_id_user" value="{{Auth::user()->id}}" hidden>
 
                   <x-label for="tanggal">{{ __('Tanggal') }} </x-label>
                   <x-input id="tanggal" type="date" name="tanggal" :value="old('tanggal')"
@@ -97,6 +98,9 @@
             <form action="{{route('excel.upload')}}" enctype="multipart/form-data" method="post" class="grid grid-cols-2 gap-6 mt-2">
                 @csrf
               <div class="grid grid-cols-1 gap-6 sm:grid-cols-2">
+
+                <input type="text" name="user_id_user" value="{{Auth::user()->id}}" hidden>
+
 
                   <x-label for="tanggal">{{ __('Tanggal') }} </x-label>
                   <x-input id="tanggal" type="date" name="tanggal" :value="old('tanggal')"
