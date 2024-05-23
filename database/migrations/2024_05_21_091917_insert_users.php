@@ -32,7 +32,26 @@ return new class extends Migration
             'role' => 'pengguna',
             'password' => bcrypt('password'),
         ]);
+
+        DB::table('pengguna_saranas')->insert([
+            'nama_pengguna' => 'Super Admin',
+            'no_hp' => '+6281234567890',
+            'id_akun' => 1,
+        ]);
+
+        DB::table('pengguna_saranas')->insert([
+            'nama_pengguna' => 'Admin',
+            'no_hp' => '+6281234567890',
+            'id_akun' => 2,
+        ]);
+
+        DB::table('pengguna_saranas')->insert([
+            'nama_pengguna' => 'Pengguna',
+            'no_hp' => '+6281234567890',
+            'id_akun' => 3,
+        ]);
     }
+
 
     /**
      * Reverse the migrations.
@@ -42,5 +61,6 @@ return new class extends Migration
         DB::table('users')->where('email', 'superadmin@gmail,com')->delete();
         DB::table('users')->where('email', 'admin@gmail,com')->delete();
         DB::table('users')->where('email', 'pengguna@gmail,com')->delete();
+        DB::table('pengguna_saranas')->whereIn('nama_pengguna', ['Super Admin', 'Admin', 'Pengguna'])->delete();
     }
 };

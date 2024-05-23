@@ -64,6 +64,14 @@
                     @endforeach
                 </select>
 
+                <x-label for="kategori_id_kategori">{{ __('Kategori') }} </x-label>
+                <select id="kategori_id_kategori" name="kategori_id_kategori" :value="old('kategori_id_kategori')" required class="block w-full px-4 py-2 mt-2 text-gray-700 bg-white border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-blue-500 focus:border-blue-500 sm:text-sm">
+                    <option value="" disabled selected>Select an option</option>
+                    @foreach($subkategoris as $item)
+                        <option value="{{ $item->id_subkategori }}">{{ $item->nama_subkategori }}</option>
+                    @endforeach
+                </select>
+
                   <x-label for="jumlah_sampah">{{ __('Jumlah Sampah') }} </x-label>
                   <x-input id="jumlah_sampah" type="number" name="jumlah_sampah" :value="old('jumlah_sampah')" required />
 

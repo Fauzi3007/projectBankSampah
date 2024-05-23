@@ -4,8 +4,10 @@ namespace App\Http\Controllers;
 
 use App\Models\Kategori;
 use App\Models\PerhitunganSampah;
+use App\Models\Subkategori;
 use Illuminate\Http\Request;
 use Carbon\Carbon;
+use Illuminate\Support\Facades\Auth;
 use PhpOffice\PhpSpreadsheet\IOFactory;
 
 
@@ -29,7 +31,8 @@ class ExcelUploadController extends Controller
         $totalRow = $worksheet->getHighestRow();
         while ($worksheet->getCell('A' . $row)->getValue() != 'TOTAL' && $row <= $totalRow) {
             $kategori = strtolower($worksheet->getCell('B' . $row)->getValue());
-            $jumlahSampah = $worksheet->getCell('C' . $row)->getValue();
+            $subkategori = strtolower($worksheet->getCell('C' . $row)->getValue());
+            $jumlahSampah = $worksheet->getCell('D' . $row)->getValue();
 
             $existingKategori = Kategori::whereRaw('LOWER(nama_kategori) = ?', [$kategori])->first();
             if (!$existingKategori) {
@@ -38,11 +41,20 @@ class ExcelUploadController extends Controller
             ]);
             }
 
+            $existingSubkategori = Subkategori::whereRaw('LOWER(nama_subkategori) = ?', [$subkategori])->first();
+            if (!$existingSubkategori) {
+            $existingSubkategori = Subkategori::create([
+                'nama_subkategori' => $subkategori,
+            ]);
+            }
+
             PerhitunganSampah::create([
             'tanggal' => $tanggal,
             'sarana_id_sarana' => $sarana,
             'kategori_id_kategori' => $existingKategori->id_kategori,
+            'subkategori_id_subkategori' => $existingSubkategori->id_subkategori,
             'jumlah_sampah' => $jumlahSampah,
+            'user_id_user' => Auth::user()->id,
             ]);
 
             $row++;

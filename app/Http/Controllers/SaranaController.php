@@ -26,8 +26,7 @@ class SaranaController extends Controller
      */
     public function create()
     {
-        $pengguna_saranas = PenggunaSarana::all();
-        return view('pages.sarana.create', compact('pengguna_saranas'));
+        return view('pages.sarana.create');
     }
 
     /**
@@ -39,7 +38,6 @@ class SaranaController extends Controller
             'nama_sarana' => ['required', 'max:50'],
             'alamat_sarana' => ['required', 'max:100'],
             'jenis_sarana' => ['required', 'max:50'],
-            'pengguna_sarana_id_pengguna_sarana' => ['required'],
         ]);
 
         Sarana::create($validatedData);
@@ -61,8 +59,7 @@ class SaranaController extends Controller
      */
     public function edit(Sarana $sarana)
     {
-        $pengguna_saranas = PenggunaSarana::all();
-        return view('pages.sarana.edit', compact('sarana', 'pengguna_saranas'));
+        return view('pages.sarana.edit', compact('sarana'));
     }
 
     /**
@@ -74,7 +71,6 @@ class SaranaController extends Controller
             'nama_sarana' => ['required', 'max:50'],
             'alamat_sarana' => ['required', 'max:100'],
             'jenis_sarana' => ['required', 'max:50'],
-            'pengguna_sarana_id_pengguna_sarana' => ['required'],
         ]);
 
         $sarana->update($validatedData);

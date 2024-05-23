@@ -5,7 +5,9 @@ namespace App\Http\Controllers;
 use App\Models\Kategori;
 use App\Models\PerhitunganSampah;
 use App\Models\Sarana;
+use App\Models\Subkategori;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class PerhitunganSampahController extends Controller
 {
@@ -24,8 +26,9 @@ class PerhitunganSampahController extends Controller
     public function create()
     {
         $kategoris = Kategori::all();
+        $subkategoris = Subkategori::all();
         $saranas = Sarana::all();
-        return view('pages.perhitungan_sampah.create', compact('kategoris', 'saranas'));
+        return view('pages.perhitungan_sampah.create', compact('kategoris', 'saranas', 'subkategoris'));
     }
 
     /**
@@ -38,6 +41,8 @@ class PerhitunganSampahController extends Controller
             'jumlah_sampah' => 'required|integer',
             'sarana_id_sarana' => 'required|integer',
             'kategori_id_kategori' => 'required|integer',
+            'subkategori_id_subkategori' => 'required|integer',
+            'user_id_user' => Auth::user()->id,
         ]);
 
         PerhitunganSampah::create($validated);
@@ -58,8 +63,9 @@ class PerhitunganSampahController extends Controller
     public function edit(PerhitunganSampah $perhitunganSampah)
     {
         $kategoris = Kategori::all();
+        $subkategoris = Subkategori::all();
         $saranas = Sarana::all();
-        return view('pages.perhitungan_sampah.edit', compact('perhitunganSampah', 'kategoris', 'saranas'));
+        return view('pages.perhitungan_sampah.edit', compact('perhitunganSampah', 'kategoris', 'saranas', 'subkategoris'));
     }
 
     /**
@@ -72,6 +78,8 @@ class PerhitunganSampahController extends Controller
             'jumlah_sampah' => 'required|integer',
             'sarana_id_sarana' => 'required|integer',
             'kategori_id_kategori' => 'required|integer',
+            'subkategori_id_subkategori' => 'required|integer',
+            'user_id_user' => Auth::user()->id,
         ]);
 
         $perhitunganSampah->update($validated);
