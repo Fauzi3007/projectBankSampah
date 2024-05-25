@@ -15,6 +15,7 @@ return new class extends Migration
             $table->increments('id_perhitungan_sampah');
             $table->date('tanggal');
             $table->unsignedInteger('kategori_id_kategori')->references('id_kategori')->on('kategoris');
+            $table->unsignedInteger('subkategori_id_subkategori')->references('id_subkategori')->on('subkategoris');
             $table->integer('jumlah_sampah');
             $table->unsignedInteger('sarana_id_sarana')->references('id_sarana')->on('saranas');
             $table->unsignedInteger('user_id_user')->references('id')->on('users');

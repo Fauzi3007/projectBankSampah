@@ -9,6 +9,8 @@ use App\Http\Controllers\PerhitunganSampahController;
 use App\Http\Controllers\ProvinsiController;
 use App\Http\Controllers\SaranaController;
 use App\Http\Controllers\SubkategoriController;
+use App\Models\PerhitunganSampah;
+use App\Models\Sarana;
 use Illuminate\Support\Facades\Response;
 
 
@@ -41,12 +43,12 @@ Route::middleware(['auth:sanctum', 'verified'])->group(function () {
 
     // Sarana
     Route::get('sarana', [SaranaController::class, 'index'])->name('sarana.index');
-    Route::post('sarana', [SaranaController::class, 'store'])->name('sarana.store');
-    Route::get('sarana/create', [SaranaController::class, 'create'])->name('sarana.create');
-    Route::get('sarana/{sarana}', [SaranaController::class, 'show'])->name('sarana.show');
-    Route::get('sarana/{sarana}/edit', [SaranaController::class, 'edit'])->name('sarana.edit');
-    Route::put('sarana/{sarana}', [SaranaController::class, 'update'])->name('sarana.update');
-    Route::delete('sarana/{sarana}', [SaranaController::class, 'destroy'])->name('sarana.destroy');
+    Route::post('sarana', [SaranaController::class, 'store'])->name('sarana.store')->middleware('admin');
+    Route::get('sarana/create', [SaranaController::class, 'create'])->name('sarana.create')->middleware('admin');
+    Route::get('sarana/{sarana}', [SaranaController::class, 'show'])->name('sarana.show')->middleware('admin');
+    Route::get('sarana/{sarana}/edit', [SaranaController::class, 'edit'])->name('sarana.edit')->middleware('admin');
+    Route::put('sarana/{sarana}', [SaranaController::class, 'update'])->name('sarana.update')->middleware('admin');
+    Route::delete('sarana/{sarana}', [SaranaController::class, 'destroy'])->name('sarana.destroy')->middleware('admin');
 
     // Kategori
     Route::get('kategori', [KategoriController::class, 'index'])->name('kategori.index');
@@ -58,23 +60,24 @@ Route::middleware(['auth:sanctum', 'verified'])->group(function () {
     Route::delete('kategori/{kategori}', [KategoriController::class, 'destroy'])->name('kategori.destroy');
 
     // Pengguna Sarana
-    Route::get('pengguna_sarana', [PenggunaSaranaController::class, 'index'])->name('pengguna_sarana.index');
-    Route::post('pengguna_sarana', [PenggunaSaranaController::class, 'store'])->name('pengguna_sarana.store');
-    Route::get('pengguna_sarana/create', [PenggunaSaranaController::class, 'create'])->name('pengguna_sarana.create');
-    Route::get('pengguna_sarana/{pengguna_sarana}', [PenggunaSaranaController::class, 'show'])->name('pengguna_sarana.show');
-    Route::get('pengguna_sarana/{pengguna_sarana}/edit', [PenggunaSaranaController::class, 'edit'])->name('pengguna_sarana.edit');
-    Route::put('pengguna_sarana/{pengguna_sarana}', [PenggunaSaranaController::class, 'update'])->name('pengguna_sarana.update');
+    Route::get('pengguna_sarana', [PenggunaSaranaController::class, 'index'])->name('pengguna_sarana.index')->middleware('admin');
+    Route::post('pengguna_sarana', [PenggunaSaranaController::class, 'store'])->name('pengguna_sarana.store')->middleware('admin');
+    Route::get('pengguna_sarana/create', [PenggunaSaranaController::class, 'create'])->name('pengguna_sarana.create')->middleware('admin');
+    Route::get('pengguna_sarana/{pengguna_sarana}', [PenggunaSaranaController::class, 'show'])->name('pengguna_sarana.show')->middleware('admin');
+    Route::get('pengguna_sarana/{pengguna_sarana}/edit', [PenggunaSaranaController::class, 'edit'])->name('pengguna_sarana.edit')->middleware('admin');
+    Route::put('pengguna_sarana/{pengguna_sarana}', [PenggunaSaranaController::class, 'update'])->name('pengguna_sarana.update')->middleware('admin');
     Route::delete('pengguna_sarana/{pengguna_sarana}', [PenggunaSaranaController::class, 'destroy'])->name('pengguna_sarana.destroy')->middleware('admin');
+
     Route::post('excel-upload', [ExcelUploadController::class, 'index'])->name('excel.upload');
 
     // Provinsi
-    Route::get('provinsi', [ProvinsiController::class, 'index'])->name('provinsi.index');
-    Route::post('provinsi', [ProvinsiController::class, 'store'])->name('provinsi.store');
-    Route::get('provinsi/create', [ProvinsiController::class, 'create'])->name('provinsi.create');
-    Route::get('provinsi/{provinsi}', [ProvinsiController::class, 'show'])->name('provinsi.show');
-    Route::get('provinsi/{provinsi}/edit', [ProvinsiController::class, 'edit'])->name('provinsi.edit');
-    Route::put('provinsi/{provinsi}', [ProvinsiController::class, 'update'])->name('provinsi.update');
-    Route::delete('provinsi/{provinsi}', [ProvinsiController::class, 'destroy'])->name('provinsi.destroy');
+    Route::get('provinsi', [ProvinsiController::class, 'index'])->name('provinsi.index')->middleware('admin');
+    Route::post('provinsi', [ProvinsiController::class, 'store'])->name('provinsi.store')->middleware('admin');
+    Route::get('provinsi/create', [ProvinsiController::class, 'create'])->name('provinsi.create')->middleware('admin');
+    Route::get('provinsi/{provinsi}', [ProvinsiController::class, 'show'])->name('provinsi.show')->middleware('admin');
+    Route::get('provinsi/{provinsi}/edit', [ProvinsiController::class, 'edit'])->name('provinsi.edit')->middleware('admin');
+    Route::put('provinsi/{provinsi}', [ProvinsiController::class, 'update'])->name('provinsi.update')->middleware('admin');
+    Route::delete('provinsi/{provinsi}', [ProvinsiController::class, 'destroy'])->name('provinsi.destroy')->middleware('admin');
 
     // Subkategori
     Route::get('subkategori', [SubkategoriController::class, 'index'])->name('subkategori.index');
@@ -85,8 +88,11 @@ Route::middleware(['auth:sanctum', 'verified'])->group(function () {
     Route::put('subkategori/{subkategori}', [SubkategoriController::class, 'update'])->name('subkategori.update');
     Route::delete('subkategori/{subkategori}', [SubkategoriController::class, 'destroy'])->name('subkategori.destroy');
 
-    // Filter Data Dashboard
+    // Filter Data
     Route::post('/filter-data', [DashboardController::class, 'filterData'])->name('filter');
+    Route::post('/filter-sampah', [PerhitunganSampah::class, 'filter'])->name('filter-sampah');
+    Route::post('/filter-sarana', [Sarana::class, 'filter'])->name('filter-sarana');
+
 
 
     Route::fallback(function() {

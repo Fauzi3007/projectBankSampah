@@ -208,7 +208,7 @@
                             </a>
                         </li>
                     @endif
-                    <!-- Mitra -->
+                    <!-- Pengguna -->
                     @if (Auth::user()->role == 'admin' || Auth::user()->role == 'super admin')
                         <li
                             class="px-3 py-2 rounded-sm mb-0.5 last:mb-0 @if (in_array(Request::segment(1), ['pengguna_sarana'])) {{ 'bg-slate-900' }} @endif">

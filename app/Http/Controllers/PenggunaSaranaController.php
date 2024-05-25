@@ -19,6 +19,7 @@ class PenggunaSaranaController extends Controller
         return view('pages.pengguna_sarana.index', compact('pengguna_saranas'));
     }
 
+
     /**
      * Show the form for creating a new resource.
      */
@@ -38,6 +39,7 @@ class PenggunaSaranaController extends Controller
             'email' => ['required', 'max:50'],
             'password' => ['required', 'max:50'],
             'role' => ['required', 'max:20'],
+
         ]);
 
         User::create([
@@ -51,7 +53,6 @@ class PenggunaSaranaController extends Controller
             'id_akun'=> User::latest()->first()->id,
             'nama_pengguna' => $validatedData['nama_pengguna'],
             'no_hp' => $validatedData['no_hp'],
-            'sarana_id_sarana' => Auth::user()->id,
         ]);
 
 
@@ -81,17 +82,28 @@ class PenggunaSaranaController extends Controller
     public function update(Request $request, PenggunaSarana $pengguna_sarana)
     {
         $validatedData = $request->validate([
-            'id_akun' => ['required', 'max:20'],
             'nama_pengguna' => ['required', 'max:50'],
             'no_hp' => ['required', 'max:20'],
-            'sarana_id_sarana' => Auth::user()->id,
-
+            'email' => ['required', 'max:50'],
+            'password' => ['required', 'max:50'],
+            'role' => ['required', 'max:20'],
 
         ]);
 
-        $pengguna_sarana->update($validatedData);
+        $pengguna_sarana->user->update([
+            'email' => $validatedData['email'],
+            'password' => Hash::make($validatedData['password']),
+            'name' => $validatedData['nama_pengguna'],
+            'role' => $validatedData['role'],
+        ]);
 
-        return redirect()->route('mitra.index')->with('success', 'Pengguna Sarana updated successfully.');
+        $pengguna_sarana->update([
+            'id_akun'=> $pengguna_sarana->user->id,
+            'nama_pengguna' => $validatedData['nama_pengguna'],
+            'no_hp' => $validatedData['no_hp'],
+        ]);
+
+        return redirect()->route('pengguna_sarana.index')->with('success', 'Pengguna Sarana updated successfully.');
     }
 
     /**
@@ -101,6 +113,6 @@ class PenggunaSaranaController extends Controller
     {
         $pengguna_sarana->delete();
 
-        return redirect()->route('mitra.index')->with('success', 'Pengguna Sarana deleted successfully.');
+        return redirect()->route('pengguna_sarana.index')->with('success', 'Pengguna Sarana deleted successfully.');
     }
 }

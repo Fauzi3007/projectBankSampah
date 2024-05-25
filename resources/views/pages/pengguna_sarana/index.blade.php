@@ -67,7 +67,7 @@
                                     </div>
                                 </td>
                                 <td class="p-2 whitespace-nowrap">
-                                    <div class="text-left">{{$item->nama_pengguna}}</div>
+                                    <div class="text-left">{{$item->user->name}}</div>
                                 </td>
                                 <td class="p-2 whitespace-nowrap">
                                     <div class="text-left">{{$item->no_hp}}</div>
