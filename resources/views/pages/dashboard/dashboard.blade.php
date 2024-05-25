@@ -19,7 +19,7 @@
                 <div class="col-span-3">
                     <div class="bg-white rounded-lg shadow p-3">
                         <h3 class="text-lg font-semibold mb-2">Tanggal</h3>
-                        <form action="{{route('filter')}}" method="post">
+                        <form action="{{ route('filter') }}" method="post">
                             @csrf
                             <div class="relative mb-2">
                                 <input
@@ -34,24 +34,20 @@
                                 </div>
                             </div>
 
-
                             <!-- Users filter -->
                             <h4 class="text-md font-semibold mb-2">Users</h4>
                             <div class="relative inline-block text-left ml-2 mr-2">
                                 <div>
-                                    <span class="rounded-md shadow-sm">
-                                        <button type="button"
-                                            class="inline-flex justify-center w-full rounded-md border border-gray-300 px-4 py-2 bg-white text-sm leading-5 font-medium text-slate-500 hover:text-gray-500 focus:outline-none focus:border-blue-300 focus:shadow-outline-blue active:bg-gray-50 active:text-gray-800 transition ease-in-out duration-150 ml-2"
-                                            id="dropdown-menuuser" aria-haspopup="true" aria-expanded="false">
-                                            Pilih User
-                                            <svg class="-mr-1 ml-2 h-5 w-5" xmlns="http://www.w3.org/2000/svg"
-                                                viewBox="0 0 20 20" fill="currentColor">
-                                                <path fill-rule="evenodd"
-                                                    d="M10 12l-6-6 1.5-1.5L10 9.8l4.5-4.5L16 6l-6 6z"
-                                                    clip-rule="evenodd" />
-                                            </svg>
-                                        </button>
-                                    </span>
+                                    <button type="button"
+                                        class="inline-flex justify-center w-full rounded-md border border-gray-300 px-4 py-2 bg-white text-sm leading-5 font-medium text-slate-500 hover:text-gray-500 focus:outline-none focus:border-blue-300 focus:shadow-outline-blue active:bg-gray-50 active:text-gray-800 transition ease-in-out duration-150 ml-2"
+                                        id="dropdown-menuuser" aria-haspopup="true" aria-expanded="false">
+                                        Pilih User
+                                        <svg class="-mr-1 ml-2 h-5 w-5" xmlns="http://www.w3.org/2000/svg"
+                                            viewBox="0 0 20 20" fill="currentColor">
+                                            <path fill-rule="evenodd" d="M10 12l-6-6 1.5-1.5L10 9.8l4.5-4.5L16 6l-6 6z"
+                                                clip-rule="evenodd" />
+                                        </svg>
+                                    </button>
                                 </div>
                                 <div class="origin-top-right z-10 absolute left-0 mt-2 w-96 rounded-md shadow-lg hidden"
                                     id="dropdown-listuser">
@@ -72,66 +68,20 @@
                                 </div>
                             </div>
 
-                            {{-- Skrip dropdown --}}
-                            <script>
-                                document.addEventListener('DOMContentLoaded', function() {
-                                    // Get the dropdown menu element
-                                    var dropdownMenu = document.getElementById('dropdown-menuuser');
-                                    var dropdownList = document.getElementById('dropdown-listuser');
-
-                                    // Toggle the dropdown menu
-                                    function toggleDropdown() {
-                                        if (dropdownList.classList.contains('hidden')) {
-                                            dropdownList.classList.remove('hidden');
-                                            dropdownMenu.setAttribute('aria-expanded', 'true');
-                                        } else {
-                                            dropdownList.classList.add('hidden');
-                                            dropdownMenu.setAttribute('aria-expanded', 'false');
-                                        }
-                                    }
-
-                                    // Close the dropdown menu when clicked outside
-                                    document.addEventListener('click', function(event) {
-                                        var target = event.target;
-
-                                        if (!dropdownMenu.contains(target) && !target.classList.contains('form-checkbox')) {
-                                            if (!dropdownList.classList.contains('hidden')) {
-                                                dropdownList.classList.add('hidden');
-                                                dropdownMenu.setAttribute('aria-expanded', 'false');
-                                            }
-                                        }
-                                    });
-
-                                    // Add event listener to toggle the dropdown menu when clicked
-                                    dropdownMenu.addEventListener('click', toggleDropdown);
-
-                                    // Prevent dropdown menu from closing when clicking checkboxes
-                                    var checkboxes = document.querySelectorAll('.form-checkbox');
-                                    checkboxes.forEach(function(checkbox) {
-                                        checkbox.addEventListener('click', function(event) {
-                                            event.stopPropagation();
-                                        });
-                                    });
-                                });
-                            </script>
-
                             <!-- Kategori Sampah filter -->
                             <h4 class="text-md font-semibold mb-2 mt-2">Kategori Sampah</h4>
                             <div class="relative inline-block text-left ml-2 mr-2">
                                 <div>
-                                    <span class="rounded-md shadow-sm">
-                                        <button type="button"
-                                            class="inline-flex justify-center w-full rounded-md border border-gray-300 px-4 py-2 bg-white text-sm leading-5 font-medium text-slate-500 hover:text-gray-500 focus:outline-none focus:border-blue-300 focus:shadow-outline-blue active:bg-gray-50 active:text-gray-800 transition ease-in-out duration-150 ml-2"
-                                            id="dropdown-menujenis" aria-haspopup="true" aria-expanded="false">
-                                            Pilih Kategori Sampah
-                                            <svg class="-mr-1 ml-2 h-5 w-5" xmlns="http://www.w3.org/2000/svg"
-                                                viewBox="0 0 20 20" fill="currentColor">
-                                                <path fill-rule="evenodd"
-                                                    d="M10 12l-6-6 1.5-1.5L10 9.8l4.5-4.5L16 6l-6 6z"
-                                                    clip-rule="evenodd" />
-                                            </svg>
-                                        </button>
-                                    </span>
+                                    <button type="button"
+                                        class="inline-flex justify-center w-full rounded-md border border-gray-300 px-4 py-2 bg-white text-sm leading-5 font-medium text-slate-500 hover:text-gray-500 focus:outline-none focus:border-blue-300 focus:shadow-outline-blue active:bg-gray-50 active:text-gray-800 transition ease-in-out duration-150 ml-2"
+                                        id="dropdown-menujenis" aria-haspopup="true" aria-expanded="false">
+                                        Pilih Kategori Sampah
+                                        <svg class="-mr-1 ml-2 h-5 w-5" xmlns="http://www.w3.org/2000/svg"
+                                            viewBox="0 0 20 20" fill="currentColor">
+                                            <path fill-rule="evenodd" d="M10 12l-6-6 1.5-1.5L10 9.8l4.5-4.5L16 6l-6 6z"
+                                                clip-rule="evenodd" />
+                                        </svg>
+                                    </button>
                                 </div>
                                 <div class="origin-top-right z-10 absolute left-0 mt-2 w-96 rounded-md shadow-lg hidden"
                                     id="dropdown-listjenis">
@@ -151,65 +101,20 @@
                                 </div>
                             </div>
 
-                            <script>
-                                document.addEventListener('DOMContentLoaded', function() {
-                                    // Get the dropdown menu element
-                                    var dropdownMenu = document.getElementById('dropdown-menujenis');
-                                    var dropdownList = document.getElementById('dropdown-listjenis');
-
-                                    // Toggle the dropdown menu
-                                    function toggleDropdown() {
-                                        if (dropdownList.classList.contains('hidden')) {
-                                            dropdownList.classList.remove('hidden');
-                                            dropdownMenu.setAttribute('aria-expanded', 'true');
-                                        } else {
-                                            dropdownList.classList.add('hidden');
-                                            dropdownMenu.setAttribute('aria-expanded', 'false');
-                                        }
-                                    }
-
-                                    // Close the dropdown menu when clicked outside
-                                    document.addEventListener('click', function(event) {
-                                        var target = event.target;
-
-                                        if (!dropdownMenu.contains(target) && !target.classList.contains('form-checkbox')) {
-                                            if (!dropdownList.classList.contains('hidden')) {
-                                                dropdownList.classList.add('hidden');
-                                                dropdownMenu.setAttribute('aria-expanded', 'false');
-                                            }
-                                        }
-                                    });
-
-                                    // Add event listener to toggle the dropdown menu when clicked
-                                    dropdownMenu.addEventListener('click', toggleDropdown);
-
-                                    // Prevent dropdown menu from closing when clicking checkboxes
-                                    var checkboxes = document.querySelectorAll('.form-checkbox');
-                                    checkboxes.forEach(function(checkbox) {
-                                        checkbox.addEventListener('click', function(event) {
-                                            event.stopPropagation();
-                                        });
-                                    });
-                                });
-                            </script>
-
                             <!-- Subkategori Sampah filter -->
                             <h4 class="text-md font-semibold mb-2 mt-2">Subkategori Sampah</h4>
                             <div class="relative inline-block text-left ml-2 mr-2">
                                 <div>
-                                    <span class="rounded-md shadow-sm">
-                                        <button type="button"
-                                            class="inline-flex justify-center w-full rounded-md border border-gray-300 px-4 py-2 bg-white text-sm leading-5 font-medium text-slate-500 hover:text-gray-500 focus:outline-none focus:border-blue-300 focus:shadow-outline-blue active:bg-gray-50 active:text-gray-800 transition ease-in-out duration-150 ml-2"
-                                            id="dropdown-menusubjenis" aria-haspopup="true" aria-expanded="false">
-                                            Pilih Subkategori Sampah
-                                            <svg class="-mr-1 ml-2 h-5 w-5" xmlns="http://www.w3.org/2000/svg"
-                                                viewBox="0 0 20 20" fill="currentColor">
-                                                <path fill-rule="evenodd"
-                                                    d="M10 12l-6-6 1.5-1.5L10 9.8l4.5-4.5L16 6l-6 6z"
-                                                    clip-rule="evenodd" />
-                                            </svg>
-                                        </button>
-                                    </span>
+                                    <button type="button"
+                                        class="inline-flex justify-center w-full rounded-md border border-gray-300 px-4 py-2 bg-white text-sm leading-5 font-medium text-slate-500 hover:text-gray-500 focus:outline-none focus:border-blue-300 focus:shadow-outline-blue active:bg-gray-50 active:text-gray-800 transition ease-in-out duration-150 ml-2"
+                                        id="dropdown-menusubjenis" aria-haspopup="true" aria-expanded="false">
+                                        Pilih Subkategori Sampah
+                                        <svg class="-mr-1 ml-2 h-5 w-5" xmlns="http://www.w3.org/2000/svg"
+                                            viewBox="0 0 20 20" fill="currentColor">
+                                            <path fill-rule="evenodd" d="M10 12l-6-6 1.5-1.5L10 9.8l4.5-4.5L16 6l-6 6z"
+                                                clip-rule="evenodd" />
+                                        </svg>
+                                    </button>
                                 </div>
                                 <div class="origin-top-right z-10 absolute left-0 mt-2 w-96 rounded-md shadow-lg hidden"
                                     id="dropdown-listsubjenis">
@@ -220,7 +125,8 @@
                                                     <label class="inline-flex items-center">
                                                         <input type="checkbox" name="selectedSubJenis[]"
                                                             value="{{ $item->id_subkategori }}" class="form-checkbox">
-                                                        <span class="ml-2">{{ ucwords($item->nama_subkategori) }}</span>
+                                                        <span
+                                                            class="ml-2">{{ ucwords($item->nama_subkategori) }}</span>
                                                     </label>
                                                 @endforeach
                                             </div>
@@ -229,65 +135,20 @@
                                 </div>
                             </div>
 
-                            <script>
-                                document.addEventListener('DOMContentLoaded', function() {
-                                    // Get the dropdown menu element
-                                    var dropdownMenu = document.getElementById('dropdown-menusubjenis');
-                                    var dropdownList = document.getElementById('dropdown-listsubjenis');
-
-                                    // Toggle the dropdown menu
-                                    function toggleDropdown() {
-                                        if (dropdownList.classList.contains('hidden')) {
-                                            dropdownList.classList.remove('hidden');
-                                            dropdownMenu.setAttribute('aria-expanded', 'true');
-                                        } else {
-                                            dropdownList.classList.add('hidden');
-                                            dropdownMenu.setAttribute('aria-expanded', 'false');
-                                        }
-                                    }
-
-                                    // Close the dropdown menu when clicked outside
-                                    document.addEventListener('click', function(event) {
-                                        var target = event.target;
-
-                                        if (!dropdownMenu.contains(target) && !target.classList.contains('form-checkbox')) {
-                                            if (!dropdownList.classList.contains('hidden')) {
-                                                dropdownList.classList.add('hidden');
-                                                dropdownMenu.setAttribute('aria-expanded', 'false');
-                                            }
-                                        }
-                                    });
-
-                                    // Add event listener to toggle the dropdown menu when clicked
-                                    dropdownMenu.addEventListener('click', toggleDropdown);
-
-                                    // Prevent dropdown menu from closing when clicking checkboxes
-                                    var checkboxes = document.querySelectorAll('.form-checkbox');
-                                    checkboxes.forEach(function(checkbox) {
-                                        checkbox.addEventListener('click', function(event) {
-                                            event.stopPropagation();
-                                        });
-                                    });
-                                });
-                            </script>
-
                             <!-- Provinsi filter -->
                             <h4 class="text-md font-semibold mb-2 mt-2">Provinsi</h4>
                             <div class="relative inline-block text-left ml-2 mr-2 mb-6">
                                 <div>
-                                    <span class="rounded-md shadow-sm">
-                                        <button type="button"
-                                            class="inline-flex justify-center w-full rounded-md border border-gray-300 px-4 py-2 bg-white text-sm leading-5 font-medium text-slate-500 hover:text-gray-500 focus:outline-none focus:border-blue-300 focus:shadow-outline-blue active:bg-gray-50 active:text-gray-800 transition ease-in-out duration-150 ml-2"
-                                            id="dropdown-menuprovinsi" aria-haspopup="true" aria-expanded="false">
-                                            Pilih Provinsi
-                                            <svg class="-mr-1 ml-2 h-5 w-5" xmlns="http://www.w3.org/2000/svg"
-                                                viewBox="0 0 20 20" fill="currentColor">
-                                                <path fill-rule="evenodd"
-                                                    d="M10 12l-6-6 1.5-1.5L10 9.8l4.5-4.5L16 6l-6 6z"
-                                                    clip-rule="evenodd" />
-                                            </svg>
-                                        </button>
-                                    </span>
+                                    <button type="button"
+                                        class="inline-flex justify-center w-full rounded-md border border-gray-300 px-4 py-2 bg-white text-sm leading-5 font-medium text-slate-500 hover:text-gray-500 focus:outline-none focus:border-blue-300 focus:shadow-outline-blue active:bg-gray-50 active:text-gray-800 transition ease-in-out duration-150 ml-2"
+                                        id="dropdown-menuprovinsi" aria-haspopup="true" aria-expanded="false">
+                                        Pilih Provinsi
+                                        <svg class="-mr-1 ml-2 h-5 w-5" xmlns="http://www.w3.org/2000/svg"
+                                            viewBox="0 0 20 20" fill="currentColor">
+                                            <path fill-rule="evenodd" d="M10 12l-6-6 1.5-1.5L10 9.8l4.5-4.5L16 6l-6 6z"
+                                                clip-rule="evenodd" />
+                                        </svg>
+                                    </button>
                                 </div>
                                 <div class="origin-top-right z-10 absolute left-0 mt-2 w-96 rounded-md shadow-lg hidden"
                                     id="dropdown-listprovinsi">
@@ -306,55 +167,50 @@
                                     </div>
                                 </div>
                             </div>
-                            <script>
-                                document.addEventListener('DOMContentLoaded', function() {
-                                    // Get the dropdown menu element
-                                    var dropdownMenu = document.getElementById('dropdown-menuprovinsi');
-                                    var dropdownList = document.getElementById('dropdown-listprovinsi');
-
-                                    // Toggle the dropdown menu
-                                    function toggleDropdown() {
-                                        if (dropdownList.classList.contains('hidden')) {
-                                            dropdownList.classList.remove('hidden');
-                                            dropdownMenu.setAttribute('aria-expanded', 'true');
-                                        } else {
-                                            dropdownList.classList.add('hidden');
-                                            dropdownMenu.setAttribute('aria-expanded', 'false');
-                                        }
-                                    }
-
-                                    // Close the dropdown menu when clicked outside
-                                    document.addEventListener('click', function(event) {
-                                        var target = event.target;
-
-                                        if (!dropdownMenu.contains(target) && !target.classList.contains('form-checkbox')) {
-                                            if (!dropdownList.classList.contains('hidden')) {
-                                                dropdownList.classList.add('hidden');
-                                                dropdownMenu.setAttribute('aria-expanded', 'false');
-                                            }
-                                        }
-                                    });
-
-                                    // Add event listener to toggle the dropdown menu when clicked
-                                    dropdownMenu.addEventListener('click', toggleDropdown);
-
-                                    // Prevent dropdown menu from closing when clicking checkboxes
-                                    var checkboxes = document.querySelectorAll('.form-checkbox');
-                                    checkboxes.forEach(function(checkbox) {
-                                        checkbox.addEventListener('click', function(event) {
-                                            event.stopPropagation();
-                                        });
-                                    });
-                                });
-                            </script>
 
                             <!-- Filter Button -->
+                            <input type="submit"
+                                class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 w-full rounded mt-4"
+                                value="Filter">
+                        </form>
                     </div>
-                    <input type="submit"
-                        class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 w-full rounded mt-4">Filter</input>
                 </div>
 
-                </form>
+                <script>
+                    document.addEventListener('DOMContentLoaded', function() {
+                        function setupDropdown(menuId, listId) {
+                            const dropdownMenu = document.getElementById(menuId);
+                            const dropdownList = document.getElementById(listId);
+
+                            function toggleDropdown() {
+                                dropdownList.classList.toggle('hidden');
+                                dropdownMenu.setAttribute('aria-expanded', !dropdownList.classList.contains('hidden'));
+                            }
+
+                            document.addEventListener('click', function(event) {
+                                if (!dropdownMenu.contains(event.target) && !event.target.classList.contains(
+                                        'form-checkbox')) {
+                                    dropdownList.classList.add('hidden');
+                                    dropdownMenu.setAttribute('aria-expanded', 'false');
+                                }
+                            });
+
+                            dropdownMenu.addEventListener('click', toggleDropdown);
+
+                            document.querySelectorAll('.form-checkbox').forEach(checkbox => {
+                                checkbox.addEventListener('click', event => {
+                                    event.stopPropagation();
+                                });
+                            });
+                        }
+
+                        setupDropdown('dropdown-menuuser', 'dropdown-listuser');
+                        setupDropdown('dropdown-menujenis', 'dropdown-listjenis');
+                        setupDropdown('dropdown-menusubjenis', 'dropdown-listsubjenis');
+                        setupDropdown('dropdown-menuprovinsi', 'dropdown-listprovinsi');
+                    });
+                </script>
+
 
 
 
