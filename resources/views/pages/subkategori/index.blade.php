@@ -91,7 +91,7 @@
                     </table>
                     <!-- Pagination -->
                     <div class="mt-4">
-                        {{ $kategoris->links() }}
+                        {{ $subkategoris->links() }}
                     </div>
 
                 </div>

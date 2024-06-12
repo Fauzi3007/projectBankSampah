@@ -4,10 +4,62 @@
         <div class="sm:flex sm:justify-between sm:items-center mb-8">
             <!-- Right: Actions -->
             <div class="grid grid-flow-col sm:auto-cols-max justify-start sm:justify-end gap-2">
-                <!-- Filter button -->
-                <x-dropdown-filter align="left" />
-                <!-- Datepicker built with flatpickr -->
-                <x-datepicker />
+                <div class="grid grid-flow-col sm:auto-cols-max justify-start sm:justify-end gapy-2 px-3">
+                    <form action="{{ route('filter-sarana') }}" method="POST">
+                        @csrf
+                        <div class="flex flex-col sm:flex-row items-center sm:space-x-4">
+                            <!-- Provinsi Dropdown -->
+                            <div class="relative inline-block text-left ml-2 mr-2">
+                                <button type="button" class="inline-flex justify-center w-full rounded-md border border-gray-300 px-4 py-2 bg-white text-sm leading-5 font-medium text-slate-500 hover:text-gray-500 focus:outline-none focus:border-blue-300 focus:shadow-outline-blue active:bg-gray-50 active:text-gray-800 transition ease-in-out duration-150 ml-2" id="dropdown-menu" aria-haspopup="true" aria-expanded="false">
+                                    Pilih Provinsi
+                                    <svg class="-mr-1 ml-2 h-5 w-5" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor">
+                                        <path fill-rule="evenodd" d="M10 12l-6-6 1.5-1.5L10 9.8l4.5-4.5L16 6l-6 6z" clip-rule="evenodd" />
+                                    </svg>
+                                </button>
+                                <div class="origin-top-right absolute left-0 mt-2 w-96 rounded-md shadow-lg hidden" id="dropdown-list">
+                                    <div class="rounded-md bg-white shadow-xs">
+                                        <div class="px-4 py-3">
+                                            <div class="grid grid-cols-3 gap-1">
+                                                @foreach ($provinsis as $loc)
+                                                    <label class="inline-flex items-center">
+                                                        <input type="checkbox" name="selectedProvinsi[]" value="{{ $loc->id_provinsi }}" class="form-checkbox">
+                                                        <span class="ml-2">{{ ucwords($loc->nama_provinsi) }}</span>
+                                                    </label>
+                                                @endforeach
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- Jenis Sarana Dropdown -->
+                            <div class="relative inline-block text-left ml-2 mr-2">
+                                <button type="button" class="inline-flex justify-center w-full rounded-md border border-gray-300 px-4 py-2 bg-white text-sm leading-5 font-medium text-slate-500 hover:text-gray-500 focus:outline-none focus:border-blue-300 focus:shadow-outline-blue active:bg-gray-50 active:text-gray-800 transition ease-in-out duration-150 ml-2" id="dropdown-menuuser" aria-haspopup="true" aria-expanded="false">
+                                    Pilih Jenis Sarana
+                                    <svg class="-mr-1 ml-2 h-5 w-5" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor">
+                                        <path fill-rule="evenodd" d="M10 12l-6-6 1.5-1.5L10 9.8l4.5-4.5L16 6l-6 6z" clip-rule="evenodd" />
+                                    </svg>
+                                </button>
+                                <div class="origin-top-right z-10 absolute left-0 mt-2 w-96 rounded-md shadow-lg hidden" id="dropdown-listuser">
+                                    <div class="rounded-md bg-white shadow-xs">
+                                        <div class="px-4 py-3">
+                                            <div class="grid grid-cols-3 gap-1">
+                                                @foreach ($jenis_sarana as $item)
+                                                    <label class="inline-flex items-center">
+                                                        <input type="checkbox" name="selectedJenisSarana[]" value="{{ $item->jenis_sarana }}" class="form-checkbox">
+                                                        <span class="ml-2">{{ Str::limit(ucwords($item->jenis_sarana), 10, '..') }}</span>
+                                                    </label>
+                                                @endforeach
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <button type="submit" class="px-4 py-2 rounded-md bg-blue-500 text-white mt-2 sm:mt-0">Filter</button>
+                        </div>
+                    </form>
+                </div>
             </div>
         </div>
 
@@ -30,62 +82,7 @@
 
         <!-- Filter Form -->
         <div class="grid grid-cols-12 gap-6 mt-2">
-            <div class="grid grid-flow-col sm:auto-cols-max justify-start sm:justify-end gapy-2 px-3">
-                <form action="{{ route('filter-sarana') }}" method="POST">
-                    @csrf
-                    <div class="flex flex-col sm:flex-row items-center sm:space-x-4">
-                        <!-- Provinsi Dropdown -->
-                        <div class="relative inline-block text-left ml-2 mr-2">
-                            <button type="button" class="inline-flex justify-center w-full rounded-md border border-gray-300 px-4 py-2 bg-white text-sm leading-5 font-medium text-slate-500 hover:text-gray-500 focus:outline-none focus:border-blue-300 focus:shadow-outline-blue active:bg-gray-50 active:text-gray-800 transition ease-in-out duration-150 ml-2" id="dropdown-menu" aria-haspopup="true" aria-expanded="false">
-                                Pilih Provinsi
-                                <svg class="-mr-1 ml-2 h-5 w-5" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor">
-                                    <path fill-rule="evenodd" d="M10 12l-6-6 1.5-1.5L10 9.8l4.5-4.5L16 6l-6 6z" clip-rule="evenodd" />
-                                </svg>
-                            </button>
-                            <div class="origin-top-right absolute right-0 mt-2 w-96 rounded-md shadow-lg hidden" id="dropdown-list">
-                                <div class="rounded-md bg-white shadow-xs">
-                                    <div class="px-4 py-3">
-                                        <div class="grid grid-cols-3 gap-1">
-                                            @foreach ($provinsis as $loc)
-                                                <label class="inline-flex items-center">
-                                                    <input type="checkbox" name="selectedProvinsi[]" value="{{ $loc->id_provinsi }}" class="form-checkbox">
-                                                    <span class="ml-2">{{ ucwords($loc->nama_provinsi) }}</span>
-                                                </label>
-                                            @endforeach
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
 
-                        <!-- Jenis Sarana Dropdown -->
-                        <div class="relative inline-block text-left ml-2 mr-2">
-                            <button type="button" class="inline-flex justify-center w-full rounded-md border border-gray-300 px-4 py-2 bg-white text-sm leading-5 font-medium text-slate-500 hover:text-gray-500 focus:outline-none focus:border-blue-300 focus:shadow-outline-blue active:bg-gray-50 active:text-gray-800 transition ease-in-out duration-150 ml-2" id="dropdown-menuuser" aria-haspopup="true" aria-expanded="false">
-                                Pilih Jenis Sarana
-                                <svg class="-mr-1 ml-2 h-5 w-5" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor">
-                                    <path fill-rule="evenodd" d="M10 12l-6-6 1.5-1.5L10 9.8l4.5-4.5L16 6l-6 6z" clip-rule="evenodd" />
-                                </svg>
-                            </button>
-                            <div class="origin-top-right z-10 absolute left-0 mt-2 w-96 rounded-md shadow-lg hidden" id="dropdown-listuser">
-                                <div class="rounded-md bg-white shadow-xs">
-                                    <div class="px-4 py-3">
-                                        <div class="grid grid-cols-3 gap-1">
-                                            @foreach ($jenis_sarana as $item)
-                                                <label class="inline-flex items-center">
-                                                    <input type="checkbox" name="selectedJenisSarana[]" value="{{ $item->jenis_sarana }}" class="form-checkbox">
-                                                    <span class="ml-2">{{ Str::limit(ucwords($item->jenis_sarana), 10, '..') }}</span>
-                                                </label>
-                                            @endforeach
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-
-                        <button type="submit" class="px-4 py-2 rounded-md bg-blue-500 text-white mt-2 sm:mt-0">Filter</button>
-                    </div>
-                </form>
-            </div>
         </div>
 
         <!-- Sarana Table -->

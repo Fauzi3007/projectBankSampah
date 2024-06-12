@@ -16,7 +16,7 @@ class DashboardController extends Controller
     {
         // Fetch necessary data for filters
         $users = User::all();
-        $provinsis = Provinsi::with('kotas')->get();
+        $provinsis = Provinsi::get();
         $kategoris = Kategori::with('subkategoris')->get();
         $subkategoris = SubKategori::all();
 
@@ -47,13 +47,13 @@ class DashboardController extends Controller
             ->groupBy('provinsi_id_provinsi');
 
 
-        return view('pages.dashboard.dashboard', compact('users', 'provinsis', 'kategoris', 'stackedBarData', 'pieChartData', 'barChartData'));
+        return view('pages.dashboard.dashboard', compact('users', 'provinsis', 'subkategoris','kategoris', 'stackedBarData', 'pieChartData', 'barChartData'));
     }
 
     public function filterData(Request $request)
     {
         $users = User::all();
-        $provinsis = Provinsi::with('kotas')->get();
+        $provinsis = Provinsi::get();
         $kategoris = Kategori::with('subkategoris')->get();
         $subkategoris = SubKategori::all();
 

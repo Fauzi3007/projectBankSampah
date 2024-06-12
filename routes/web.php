@@ -90,8 +90,8 @@ Route::middleware(['auth:sanctum', 'verified'])->group(function () {
 
     // Filter Data
     Route::post('/filter-data', [DashboardController::class, 'filterData'])->name('filter');
-    Route::post('/filter-sampah', [PerhitunganSampah::class, 'filter'])->name('filter-sampah');
-    Route::post('/filter-sarana', [Sarana::class, 'filter'])->name('filter-sarana');
+    Route::post('/filter-sampah', [PerhitunganSampahController::class, 'filter'])->name('filter-sampah');
+    Route::post('/filter-sarana', [SaranaController::class, 'filter'])->name('filter-sarana');
 
 
 

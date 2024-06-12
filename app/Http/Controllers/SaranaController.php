@@ -48,7 +48,7 @@ class SaranaController extends Controller
 
         $saranas = $sarana->paginate(5);
 
-        return view('pages.perhitungan_sampah.index', compact('saranas', 'provinsis', 'jenis_sarana'));
+        return view('pages.sarana.index', compact('saranas', 'provinsis', 'jenis_sarana'));
     }
 
     /**

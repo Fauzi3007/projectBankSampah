@@ -18,7 +18,7 @@ class PerhitunganSampahController extends Controller
      */
     public function index()
     {
-        $saranas = Sarana::select('id_sarana', 'nama_sarana')->get;
+        $saranas = Sarana::select('id_sarana', 'nama_sarana')->get();
         $kategoris = Kategori::all();
         $subkategoris = Subkategori::all();
         $provinsis  = Provinsi::all();
@@ -34,7 +34,7 @@ class PerhitunganSampahController extends Controller
     public function filter(Request $request)
     {
 
-        $saranas = Sarana::select('id_sarana', 'nama_sarana')->get;
+        $saranas = Sarana::select('id_sarana', 'nama_sarana')->get();
         $kategoris = Kategori::all();
         $subkategoris = Subkategori::all();
         $users = Auth::user()->role == 'admin' || Auth::user()->role == 'super admin' ? User::all() : User::where('role', 'pengguna')->get();
@@ -48,7 +48,7 @@ class PerhitunganSampahController extends Controller
         $user_id_user = $request->input('selectedUser');
         $provinsi_id_provinsi = $request->input('selectedProvinsi');
 
-        $perhitunganSampah = PerhitunganSampah::join('saranas','perhitungan_sampahs.sarana_id_sarana','=','saranas.id_sarana')->query();
+        $perhitunganSampah = PerhitunganSampah::join('saranas','perhitungan_sampahs.sarana_id_sarana','=','saranas.id_sarana')->getQuery();
 
         $perhitunganSampah->where(function ($query) use ($tanggal, $jumlah_sampah, $sarana_id_sarana, $kategori_id_kategori, $subkategori_id_subkategori, $user_id_user, $provinsi_id_provinsi) {
             if ($tanggal) {

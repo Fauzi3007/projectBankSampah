@@ -14,8 +14,8 @@ class SubkategoriController extends Controller
     public function index()
     {
 
-        $subkategoris = Subkategori::all();
-        return view('subkategori.index', compact('subkategoris'));
+        $subkategoris = Subkategori::paginate(5);
+        return view('pages.subkategori.index', compact('subkategoris'));
     }
 
     /**
@@ -24,7 +24,7 @@ class SubkategoriController extends Controller
     public function create()
     {
         $kategoris = Kategori::all();
-        return view('subkategori.create', compact('kategoris'));
+        return view('pages.subkategori.create', compact('kategoris'));
     }
 
     /**
@@ -48,7 +48,7 @@ class SubkategoriController extends Controller
      */
     public function show(Subkategori $subkategoris)
     {
-        return view('subkategori.show', compact('subkategoris'));
+        return view('pages.subkategori.show', compact('subkategoris'));
     }
 
     /**
@@ -57,7 +57,7 @@ class SubkategoriController extends Controller
     public function edit(Subkategori $subkategoris)
     {
         $kategoris = Kategori::all();
-        return view('subkategori.edit', compact('subkategoris', 'kategoris'));
+        return view('pages.subkategori.edit', compact('subkategoris', 'kategoris'));
     }
 
     /**
