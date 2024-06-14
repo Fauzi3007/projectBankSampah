@@ -58,37 +58,6 @@
                                 </div>
                             </div>
 
-                            {{-- User Dropdown --}}
-                            <div class="relative inline-block text-left ml-2 mr-2">
-                                <div>
-                                    <button type="button"
-                                        class="inline-flex justify-center w-full rounded-md border border-gray-300 px-4 py-2 bg-white text-sm leading-5 font-medium text-slate-500 hover:text-gray-500 focus:outline-none focus:border-blue-300 focus:shadow-outline-blue active:bg-gray-50 active:text-gray-800 transition ease-in-out duration-150"
-                                        id="dropdown-menu-user" aria-haspopup="true" aria-expanded="false">
-                                        Pilih User
-                                        <svg class="-mr-1 ml-2 h-5 w-5" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20"
-                                            fill="currentColor">
-                                            <path fill-rule="evenodd"
-                                                d="M10 12l-6-6 1.5-1.5L10 9.8l4.5-4.5L16 6l-6 6z" clip-rule="evenodd" />
-                                        </svg>
-                                    </button>
-                                </div>
-                                <div class="origin-top-right z-10 absolute left-0 mt-2 w-96 rounded-md shadow-lg hidden"
-                                    id="dropdown-list-user">
-                                    <div class="rounded-md bg-white shadow-xs">
-                                        <div class="px-4 py-3">
-                                            <div class="grid grid-cols-3 gap-1">
-                                                @foreach ($users as $item)
-                                                <label class="inline-flex items-center">
-                                                    <input type="checkbox" name="selectedUser[]" value="{{ $item->id }}"
-                                                        class="form-checkbox">
-                                                    <span class="ml-2">{{ Str::limit(ucwords($item->name), 10, '..') }}</span>
-                                                </label>
-                                                @endforeach
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
 
                             {{-- Kategori Dropdown --}}
                             <div class="relative inline-block text-left ml-2 mr-2">
@@ -96,7 +65,7 @@
                                     <button type="button"
                                         class="inline-flex justify-center w-full rounded-md border border-gray-300 px-4 py-2 bg-white text-sm leading-5 font-medium text-slate-500 hover:text-gray-500 focus:outline-none focus:border-blue-300 focus:shadow-outline-blue active:bg-gray-50 active:text-gray-800 transition ease-in-out duration-150"
                                         id="dropdown-menu-jenis" aria-haspopup="true" aria-expanded="false">
-                                        Pilih Kategori Sampah
+                                        Pilih Kategori
                                         <svg class="-mr-1 ml-2 h-5 w-5" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20"
                                             fill="currentColor">
                                             <path fill-rule="evenodd"
@@ -128,7 +97,7 @@
                                     <button type="button"
                                         class="inline-flex justify-center w-full rounded-md border border-gray-300 px-4 py-2 bg-white text-sm leading-5 font-medium text-slate-500 hover:text-gray-500 focus:outline-none focus:border-blue-300 focus:shadow-outline-blue active:bg-gray-50 active:text-gray-800 transition ease-in-out duration-150"
                                         id="dropdown-menu-subjenis" aria-haspopup="true" aria-expanded="false">
-                                        Pilih Subkategori Sampah
+                                        Pilih Subkategori
                                         <svg class="-mr-1 ml-2 h-5 w-5" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20"
                                             fill="currentColor">
                                             <path fill-rule="evenodd"
@@ -145,7 +114,7 @@
                                                 <label class="inline-flex items-center">
                                                     <input type="checkbox" name="selectedSubJenis[]"
                                                         value="{{ $item->id_sub_kategori }}" class="form-checkbox">
-                                                    <span class="ml-2">{{ ucwords($item->nama_sub_kategori) }}</span>
+                                                    <span class="ml-2">{{ ucwords($item->nama_subkategori) }}</span>
                                                 </label>
                                                 @endforeach
                                             </div>
@@ -208,7 +177,6 @@
                     }
 
                     setupDropdown('dropdown-menu-sarana', 'dropdown-list-sarana');
-                    setupDropdown('dropdown-menu-user', 'dropdown-list-user');
                     setupDropdown('dropdown-menu-jenis', 'dropdown-list-jenis');
                     setupDropdown('dropdown-menu-subjenis', 'dropdown-list-subjenis');
                 });
@@ -241,7 +209,13 @@
                                     <div class="font-semibold text-left">Kategori</div>
                                 </th>
                                 <th class="p-2 whitespace-nowrap">
+                                    <div class="font-semibold text-left">Subkategori</div>
+                                </th>
+                                <th class="p-2 whitespace-nowrap">
                                     <div class="font-semibold text-left">Jumlah</div>
+                                </th>
+                                <th class="p-2 whitespace-nowrap">
+                                    <div class="font-semibold text-left">Penginput</div>
                                 </th>
                                 <th class="p-2 whitespace-nowrap">
                                     <div class="font-semibold text-center">Aksi</div>
@@ -255,8 +229,9 @@
                                         <div class="text-left">{{ $loop->iteration }}</div>
                                     </td>
                                     <td class="p-2 whitespace-nowrap">
-                                        <div class="text-left">{{ $item->tanggal }}</div>
+                                        <div class="text-left">{{ \Carbon\Carbon::parse($item->tanggal)->format('d M Y') }}</div>
                                     </td>
+
                                     <td class="p-2 whitespace-nowrap">
                                         <div class="text-left">{{ $item->sarana->nama_sarana }}</div>
                                     </td>
@@ -264,13 +239,16 @@
                                         <div class="text-left">{{ $item->kategori->nama_kategori }}</div>
                                     </td>
                                     <td class="p-2 whitespace-nowrap">
-                                        <div class="text-left">{{ $item->jumlah_sampah }}</div>
+                                        <div class="text-left">{{ $item->subkategori->nama_subkategori }}</div>
+                                    </td>
+                                    <td class="p-2 whitespace-nowrap">
+                                        <div class="text-left">{{ $item->jumlah_sampah." Kg " }}</div>
                                     </td>
                                     <td class="p-2 whitespace-nowrap">
                                         <div class="text-left">{{ $item->user->name }}</div>
                                     </td>
                                     <td class="p-2 whitespace-nowrap flex justify-center items-center gap-1">
-                                        @if (Auth::user()->id == $item->user_id_user || Auth::user()->role == 'admin' || Auth::user()->role == 'superadmin')
+                                        @if (Auth::user()->id == $item->user_id_user || Auth::user()->role == 'admin' || Auth::user()->role == 'super admin')
                                             <a href="{{ route('perhitungan_sampah.edit', $item->id_perhitungan_sampah) }}"
                                                 class="px-4 py-2 rounded-md bg-yellow-300 hover:bg-yellow-400 text-white sm:mt-0">Edit</a>
                                             <form

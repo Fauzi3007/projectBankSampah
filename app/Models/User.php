@@ -69,4 +69,9 @@ class User extends Authenticatable
     {
         return $this->hasMany(PerhitunganSampah::class, 'user_id_user');
     }
+
+    public function sarana()
+    {
+        return $this->hasOne(Sarana::class, 'nama_admin');
+    }
 }

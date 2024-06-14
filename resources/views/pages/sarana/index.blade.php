@@ -108,11 +108,18 @@
                                     <div class="font-semibold text-left">Jenis Sarana</div>
                                 </th>
                                 <th class="p-2 whitespace-nowrap">
-                                    <div class="font-semibold text-left">Pengguna Sarana</div>
+                                    <div class="font-semibold text-left">Provinsi</div>
                                 </th>
+                                <th class="p-2 whitespace-nowrap">
+                                    <div class="font-semibold text-left">Nama Admin</div>
+                                </th>
+
+                                @if (Auth::user()->role == 'admin' || Auth::user()->role == 'super admin')
+
                                 <th class="p-2 whitespace-nowrap">
                                     <div class="font-semibold text-center">Aksi</div>
                                 </th>
+                                @endif
                             </tr>
                         </thead>
                         <tbody class="text-sm divide-y divide-slate-100 dark:divide-slate-700">
@@ -133,18 +140,22 @@
                                         <div class="text-left">{{ $item->jenis_sarana }}</div>
                                     </td>
                                     <td class="p-2 whitespace-nowrap">
-                                        <div class="text-left">{{ $item->pengguna_sarana->nama_pengguna }}</div>
+                                        <div class="text-left">{{ $item->provinsi->nama_provinsi }}</div>
                                     </td>
+                                    <td class="p-2 whitespace-nowrap">
+                                        <div class="text-left">{{ $item->user->name}}</div>
+                                    </td>
+
+                                    @if (Auth::user()->role == 'admin' || Auth::user()->role == 'super admin')
                                     <td class="p-2 whitespace-nowrap flex justify-center items-center gap-1">
-                                        @if (Auth::user()->role == 'admin' || Auth::user()->role == 'superadmin')
                                             <a href="{{ route('sarana.edit', $item->id_sarana) }}" class="px-4 py-2 rounded-md bg-yellow-300 hover:bg-yellow-400 text-white sm:mt-0">Edit</a>
                                             <form action="{{ route('sarana.destroy', $item->id_sarana) }}" method="post" class="d-inline">
                                                 @method('DELETE')
                                                 @csrf
                                                 <button type="submit" class="p-2 rounded-md bg-red-600 hover:bg-red-500 text-white sm:mt-0" onclick="return confirm('Yakin akan menghapus data?')">Hapus</button>
                                             </form>
+                                            </td>
                                         @endif
-                                    </td>
                                 </tr>
                             @empty
                                 <tr>

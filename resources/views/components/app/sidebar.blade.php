@@ -189,18 +189,13 @@
                                 class="block text-slate-200 hover:text-white truncate transition duration-150 @if (in_array(Request::segment(1), ['provinsi'])) {{ 'hover:text-slate-200' }} @endif"
                                 href="{{ route('provinsi.index') }}">
                                 <div class="flex items-center">
-                                    <svg class="shrink-0 h-6 w-6" viewBox="0 0 24 24">
-                                        <path
-                                            class="fill-current @if (in_array(Request::segment(1), ['provinsi'])) {{ 'text-indigo-500' }}@else{{ 'text-slate-400' }} @endif"
-                                            fill="#8fbffa" fill-rule="evenodd"
-                                            d="M23 5H1V3h22v2Zm0 8H1v-2h22v2ZM1 21h22v-2H1v2Z" clip-rule="evenodd"
-                                            stroke-width="1"></path>
-                                        <path
-                                            class="fill-current @if (in_array(Request::segment(1), ['provinsi'])) {{ 'text-indigo-600' }}@else{{ 'text-slate-600' }} @endif"
-                                            fill="#2859c5" fill-rule="evenodd"
-                                            d="M7 4a3 3 0 1 1 -6 0 3 3 0 0 1 6 0Zm8 8a3 3 0 1 1 -6 0 3 3 0 0 1 6 0Zm5 11a3 3 0 1 0 0 -6 3 3 0 0 0 0 6Z"
-                                            clip-rule="evenodd" stroke-width="1"></path>
+                                    <svg class="shrink-0 h-6 w-6 @if(in_array(Request::segment(1), ['provinsi'])){{ 'text-indigo-500' }}@else{{ 'text-slate-400' }}@endif" viewBox="0 0 1024 1024" xmlns="http://www.w3.org/2000/svg">
+                                        <path d="M492.032 808.448l20.48 15.872 20.48-15.872s0.512-0.512 1.024-0.512c8.704-7.168 74.752-59.904 141.824-135.168 97.28-109.568 146.432-209.92 146.432-297.984 0-170.496-138.752-309.76-309.76-309.76S202.752 203.776 202.752 374.272c0 88.064 49.152 188.416 146.432 297.984 70.656 79.36 139.776 133.632 142.848 136.192z m20.48-676.864c134.144 0 243.2 109.056 243.2 243.2 0 70.144-44.544 157.184-129.024 252.928-44.032 50.176-89.088 90.112-114.176 111.616-25.088-20.992-69.12-60.928-113.152-110.592C314.368 532.992 269.824 445.44 269.824 374.784c-0.512-134.144 108.544-243.2 242.688-243.2z" fill="currentColor" />
+                                        <path d="M512 491.52c69.12 0 125.44-56.32 125.44-125.44S581.12 240.64 512 240.64 386.56 296.96 386.56 366.08 442.88 491.52 512 491.52z m0-184.32c32.256 0 58.88 26.624 58.88 58.88S544.768 424.96 512 424.96s-58.88-26.624-58.88-58.88S479.744 307.2 512 307.2z" fill="currentColor" />
+                                        <path d="M952.32 912.896l-105.984-263.168c-6.656-16.896-26.112-25.088-43.52-18.432-16.896 6.656-25.088 26.112-18.432 43.52l87.552 217.6H152.576l87.552-217.6c6.656-16.896-1.536-36.352-18.432-43.52-16.896-6.656-36.352 1.536-43.52 18.432l-105.984 263.168c-4.096 10.24-3.072 22.016 3.072 31.232 6.144 9.216 16.384 14.848 27.648 14.848h818.176c11.264 0 21.504-5.632 27.648-14.848 6.144-9.216 7.68-20.992 3.584-31.232z" fill="currentColor" />
                                     </svg>
+
+
 
                                     <span
                                         class="text-sm font-medium ml-3 lg:opacity-0 lg:sidebar-expanded:opacity-100 2xl:opacity-100 duration-200">Provinsi</span>

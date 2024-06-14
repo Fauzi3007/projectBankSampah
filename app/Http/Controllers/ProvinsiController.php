@@ -12,8 +12,8 @@ class ProvinsiController extends Controller
      */
     public function index()
     {
-        $provinsis = Provinsi::all();
-        return view('provinsi.index', compact('provinsis'));
+        $provinsis = Provinsi::paginate(4);
+        return view('pages.provinsi.index', compact('provinsis'));
     }
 
     /**
@@ -21,7 +21,7 @@ class ProvinsiController extends Controller
      */
     public function create()
     {
-        return view('provinsi.create');
+        return view('pages.provinsi.create');
     }
 
     /**
@@ -44,7 +44,7 @@ class ProvinsiController extends Controller
      */
     public function show(Provinsi $provinsi)
     {
-        return view('provinsi.show', compact('provinsi'));
+        return view('pages.provinsi.show', compact('provinsi'));
     }
 
     /**
@@ -52,7 +52,7 @@ class ProvinsiController extends Controller
      */
     public function edit(Provinsi $provinsis)
     {
-        return view('provinsi.edit', compact('provinsis'));
+        return view('pages.provinsi.edit', compact('provinsis'));
     }
 
     /**

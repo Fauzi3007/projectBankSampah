@@ -33,13 +33,14 @@ class PerhitunganSampahController extends Controller
      */
     public function filter(Request $request)
     {
-
+        // Fetch initial data if needed
         $saranas = Sarana::select('id_sarana', 'nama_sarana')->get();
         $kategoris = Kategori::all();
         $subkategoris = Subkategori::all();
         $users = Auth::user()->role == 'admin' || Auth::user()->role == 'super admin' ? User::all() : User::where('role', 'pengguna')->get();
         $provinsis = Provinsi::all();
 
+        // Retrieve filter parameters from request
         $tanggal = $request->input('tanggal');
         $jumlah_sampah = $request->input('operator');
         $sarana_id_sarana = $request->input('sarana_id_sarana');
@@ -48,41 +49,50 @@ class PerhitunganSampahController extends Controller
         $user_id_user = $request->input('selectedUser');
         $provinsi_id_provinsi = $request->input('selectedProvinsi');
 
-        $perhitunganSampah = PerhitunganSampah::join('saranas','perhitungan_sampahs.sarana_id_sarana','=','saranas.id_sarana')->getQuery();
+        // Initial query setup
+        $perhitunganSampah = PerhitunganSampah::join('saranas', 'perhitungan_sampahs.sarana_id_sarana', '=', 'saranas.id_sarana');
 
-        $perhitunganSampah->where(function ($query) use ($tanggal, $jumlah_sampah, $sarana_id_sarana, $kategori_id_kategori, $subkategori_id_subkategori, $user_id_user, $provinsi_id_provinsi) {
-            if ($tanggal) {
-                $dates = explode(' to ', $tanggal);
-                if (count($dates) > 1) {
-                    return $query->whereBetween('tanggal', [$dates[0], $dates[1]]);
-                } else {
-                    return $query->where('tanggal', $dates[0]);
-                }
-            }
-            if ($jumlah_sampah) {
-                $query->orderBy('jumlah_sampah', $jumlah_sampah);
-            }
-            if ($sarana_id_sarana) {
-                $query->whereIn('sarana_id_sarana', $sarana_id_sarana);
-            }
-            if ($kategori_id_kategori) {
-                $query->whereIn('kategori_id_kategori', $kategori_id_kategori);
-            }
-            if ($subkategori_id_subkategori) {
-                $query->whereIn('subkategori_id_subkategori', $subkategori_id_subkategori);
-            }
-            if ($user_id_user) {
-                $query->whereIn('user_id_user', $user_id_user);
-            }
-            if ($provinsi_id_provinsi) {
-                $query->whereIn('provinsi_id_provinsi', $provinsi_id_provinsi);
-            }
-        });
+        // Apply filters
+        if ($tanggal) {
+            $dates = explode(' - ', $tanggal);
+            if (count($dates) > 1) {
 
+                $carbonDate1 = \Carbon\Carbon::createFromFormat('M d, Y', $dates[0]);
+                $carbonDate2 = \Carbon\Carbon::createFromFormat('M d, Y', $dates[1]);
+                $perhitunganSampah->whereBetween('tanggal', [$carbonDate1, $carbonDate2]);
+            } else {
+                $carbonDate1 = \Carbon\Carbon::createFromFormat('M d, Y', $dates[0]);
+
+                $perhitunganSampah->where('tanggal', $carbonDate1);
+            }
+        }
+        if ($jumlah_sampah) {
+            $perhitunganSampah->orderBy('jumlah_sampah', $jumlah_sampah);
+        }
+        if ($sarana_id_sarana) {
+            $perhitunganSampah->whereIn('sarana_id_sarana', $sarana_id_sarana);
+        }
+        if ($kategori_id_kategori) {
+            $perhitunganSampah->whereIn('kategori_id_kategori', $kategori_id_kategori);
+        }
+        if ($subkategori_id_subkategori) {
+            $perhitunganSampah->whereIn('subkategori_id_subkategori', $subkategori_id_subkategori);
+        }
+        if ($user_id_user) {
+            $perhitunganSampah->whereIn('user_id_user', $user_id_user);
+        }
+        if ($provinsi_id_provinsi) {
+            $perhitunganSampah->whereIn('provinsi_id_provinsi', $provinsi_id_provinsi);
+        }
+
+        // Perform pagination and return results
         $perhitunganSampah = $perhitunganSampah->paginate(5);
 
-        return view('pages.perhitungan_sampah.index', compact('perhitunganSampah', 'saranas', 'kategoris', 'subkategoris', 'users'));
+
+        // Return data to view or process further
+        return view('pages.perhitungan_sampah.index', compact('perhitunganSampah', 'saranas', 'kategoris', 'subkategoris', 'users', 'provinsis'));
     }
+
 
 
     /**

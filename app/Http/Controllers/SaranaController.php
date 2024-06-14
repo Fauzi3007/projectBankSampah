@@ -56,7 +56,8 @@ class SaranaController extends Controller
      */
     public function create()
     {
-        return view('pages.sarana.create');
+        $provinsis = Provinsi::all();
+        return view('pages.sarana.create', compact('provinsis'));
     }
 
     /**
@@ -68,6 +69,9 @@ class SaranaController extends Controller
             'nama_sarana' => ['required', 'max:50'],
             'alamat_sarana' => ['required', 'max:100'],
             'jenis_sarana' => ['required', 'max:50'],
+            'provinsi_id_provinsi' => ['required',],
+            'nama_admin' => 'required'
+
         ]);
 
         Sarana::create($validatedData);
@@ -101,6 +105,9 @@ class SaranaController extends Controller
             'nama_sarana' => ['required', 'max:50'],
             'alamat_sarana' => ['required', 'max:100'],
             'jenis_sarana' => ['required', 'max:50'],
+            'provinsi_id_provinsi' => ['required',],
+            'nama_admin' => 'required'
+
         ]);
 
         $sarana->update($validatedData);

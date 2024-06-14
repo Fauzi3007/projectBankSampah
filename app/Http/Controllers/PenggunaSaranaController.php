@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\PenggunaSarana;
+use App\Models\Sarana;
 use App\Models\User;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Http\Request;
@@ -25,7 +26,8 @@ class PenggunaSaranaController extends Controller
      */
     public function create()
     {
-        return view('pages.pengguna_sarana.create');
+        $saranas = Sarana::all();
+        return view('pages.pengguna_sarana.create',compact('saranas'));
     }
 
     /**
@@ -38,7 +40,7 @@ class PenggunaSaranaController extends Controller
             'no_hp' => ['required', 'max:20'],
             'email' => ['required', 'max:50'],
             'password' => ['required', 'max:50'],
-            'role' => ['required', 'max:20'],
+            'role' => ['required'],
 
         ]);
 
@@ -65,7 +67,8 @@ class PenggunaSaranaController extends Controller
      */
     public function show(PenggunaSarana $pengguna_sarana)
     {
-        return view('pages.pengguna_sarana.show', compact('pengguna_sarana'));
+        $saranas = Sarana::all();
+        return view('pages.pengguna_sarana.show', compact('pengguna_sarana','saranas'));
     }
 
     /**
@@ -73,7 +76,8 @@ class PenggunaSaranaController extends Controller
      */
     public function edit(PenggunaSarana $pengguna_sarana)
     {
-        return view('pages.pengguna_sarana.edit', compact('pengguna_sarana'));
+        $saranas = Sarana::all();
+        return view('pages.pengguna_sarana.edit', compact('pengguna_sarana','saranas'));
     }
 
     /**

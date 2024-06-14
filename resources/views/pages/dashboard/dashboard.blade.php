@@ -17,50 +17,82 @@
             <!-- Cards -->
             <div class="grid grid-cols-12 gap-6">
                 <div class="col-span-3">
-                    <div class="bg-white rounded-lg shadow p-3">
-                        <h3 class="text-lg font-semibold mb-2">Tanggal</h3>
+
+                    <div class="bg-white rounded-lg shadow p-4">
                         <form action="{{ route('filter') }}" method="post">
                             @csrf
-                            <div class="relative mb-2">
-                                <input
-                                    class="datepicker form-input pl-9 dark:bg-slate-800 text-slate-500 hover:text-slate-600 dark:text-slate-300 dark:hover:text-slate-200 font-medium w-[14rem]"
-                                    placeholder="Pilih Tanggal" name="selectedTanggal" data-class="flatpickr-left" />
-                                <div class="absolute inset-0 right-auto flex items-center pointer-events-none">
-                                    <svg class="w-4 h-4 fill-current text-slate-500 dark:text-slate-400 ml-3"
-                                        viewBox="0 0 16 16">
-                                        <path
-                                            d="M15 2h-2V0h-2v2H9V0H7v2H5V0H3v2H1a1 1 0 00-1 1v12a1 1 0 001 1h14a1 1 0 001-1V3a1 1 0 00-1-1zm-1 12H2V6h12v8z" />
-                                    </svg>
+
+                            <!-- Tanggal -->
+                            <div class="mb-4">
+                                <label for="selectedTanggal" class="block text-sm font-medium text-gray-700">Tanggal</label>
+                                <div class="relative mt-1">
+                                    <input id="selectedTanggal" name="selectedTanggal" type="text"
+                                        class="datepicker form-input block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
+                                        placeholder="Pilih Tanggal" data-class="flatpickr-left">
+
                                 </div>
                             </div>
 
-                            <!-- Users filter -->
-                            <h4 class="text-md font-semibold mb-2">Users</h4>
-                            <div class="relative inline-block text-left ml-2 mr-2">
-                                <div>
+                            <!-- Provinsi filter -->
+                            <div class="mb-4">
+                                <label for="dropdown-menuprovinsi" class="block text-sm font-medium text-gray-700">Provinsi</label>
+                                <div class="relative">
                                     <button type="button"
-                                        class="inline-flex justify-center w-full rounded-md border border-gray-300 px-4 py-2 bg-white text-sm leading-5 font-medium text-slate-500 hover:text-gray-500 focus:outline-none focus:border-blue-300 focus:shadow-outline-blue active:bg-gray-50 active:text-gray-800 transition ease-in-out duration-150 ml-2"
-                                        id="dropdown-menuuser" aria-haspopup="true" aria-expanded="false">
-                                        Pilih User
-                                        <svg class="-mr-1 ml-2 h-5 w-5" xmlns="http://www.w3.org/2000/svg"
-                                            viewBox="0 0 20 20" fill="currentColor">
-                                            <path fill-rule="evenodd" d="M10 12l-6-6 1.5-1.5L10 9.8l4.5-4.5L16 6l-6 6z"
+                                        class="inline-flex justify-center w-full rounded-md border border-gray-300 px-4 py-2 bg-white text-sm leading-5 font-medium text-gray-700 hover:text-gray-500 focus:outline-none focus:border-blue-300 focus:shadow-outline-blue active:bg-gray-50 active:text-gray-800 transition ease-in-out duration-150"
+                                        id="dropdown-menuprovinsi" aria-haspopup="true" aria-expanded="false">
+                                        Pilih Provinsi
+                                        <svg class="-mr-1 ml-2 h-5 w-5 text-gray-400" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20"
+                                            fill="currentColor">
+                                            <path fill-rule="evenodd"
+                                                d="M10 12l-6-6 1.5-1.5L10 9.8l4.5-4.5L16 6l-6 6z"
                                                 clip-rule="evenodd" />
                                         </svg>
                                     </button>
+                                    <div
+                                        class="origin-top-right z-10 absolute left-0 mt-2 w-96 rounded-md shadow-lg hidden bg-white border border-gray-200"
+                                        id="dropdown-listprovinsi">
+                                        <div class="rounded-md shadow-xs">
+                                            <div class="px-4 py-3 grid grid-cols-3 gap-1">
+                                                @foreach ($provinsis as $provinsi)
+                                                <label class="inline-flex items-center">
+                                                    <input type="checkbox" name="selectedProvinsi[]" value="{{ $provinsi->id_provinsi }}"
+                                                        class="form-checkbox rounded text-blue-500">
+                                                    <span class="ml-2 text-gray-700">{{ ucwords($provinsi->nama_provinsi) }}</span>
+                                                </label>
+                                                @endforeach
+                                            </div>
+                                        </div>
+                                    </div>
                                 </div>
-                                <div class="origin-top-right z-10 absolute left-0 mt-2 w-96 rounded-md shadow-lg hidden"
-                                    id="dropdown-listuser">
-                                    <div class="rounded-md bg-white shadow-xs">
-                                        <div class="px-4 py-3">
-                                            <div class="grid grid-cols-3 gap-1">
-                                                @foreach ($users as $item)
-                                                    <label class="inline-flex items-center">
-                                                        <input type="checkbox" name="selectedUser[]"
-                                                            value="{{ $item->id }}" class="form-checkbox">
-                                                        <span
-                                                            class="ml-2">{{ Str::limit(ucwords($item->name), 10, '..') }}</span>
-                                                    </label>
+                            </div>
+
+                            <!-- Sarana filter -->
+                            <div class="mb-4">
+                                <label for="dropdown-menuuser" class="block text-sm font-medium text-gray-700">Sarana</label>
+                                <div class="relative">
+                                    <button type="button"
+                                        class="inline-flex justify-center w-full rounded-md border border-gray-300 px-4 py-2 bg-white text-sm leading-5 font-medium text-gray-700 hover:text-gray-500 focus:outline-none focus:border-blue-300 focus:shadow-outline-blue active:bg-gray-50 active:text-gray-800 transition ease-in-out duration-150"
+                                        id="dropdown-menuuser" aria-haspopup="true" aria-expanded="false">
+                                        Pilih Sarana
+                                        <svg class="-mr-1 ml-2 h-5 w-5 text-gray-400" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20"
+                                            fill="currentColor">
+                                            <path fill-rule="evenodd"
+                                                d="M10 12l-6-6 1.5-1.5L10 9.8l4.5-4.5L16 6l-6 6z"
+                                                clip-rule="evenodd" />
+                                        </svg>
+                                    </button>
+                                    <div
+                                        class="origin-top-right z-10 absolute left-0 mt-2 w-96 rounded-md shadow-lg hidden bg-white border border-gray-200"
+                                        id="dropdown-listuser">
+                                        <div class="rounded-md shadow-xs">
+                                            <div class="px-4 py-3 grid grid-cols-3 gap-1">
+                                                @foreach ($saranas as $sarana)
+                                                <label class="inline-flex items-center">
+                                                    <input type="checkbox" name="selectedUser[]" value="{{ $sarana->id_sarana }}"
+                                                        class="form-checkbox rounded text-blue-500">
+                                                    <span
+                                                        class="ml-2 text-gray-700">{{ Str::limit(ucwords($sarana->nama_sarana), 25, '..') }}</span>
+                                                </label>
                                                 @endforeach
                                             </div>
                                         </div>
@@ -69,31 +101,31 @@
                             </div>
 
                             <!-- Kategori Sampah filter -->
-                            <h4 class="text-md font-semibold mb-2 mt-2">Kategori Sampah</h4>
-                            <div class="relative inline-block text-left ml-2 mr-2">
-                                <div>
+                            <div class="mb-4">
+                                <label for="dropdown-menujenis" class="block text-sm font-medium text-gray-700">Kategori Sampah</label>
+                                <div class="relative">
                                     <button type="button"
-                                        class="inline-flex justify-center w-full rounded-md border border-gray-300 px-4 py-2 bg-white text-sm leading-5 font-medium text-slate-500 hover:text-gray-500 focus:outline-none focus:border-blue-300 focus:shadow-outline-blue active:bg-gray-50 active:text-gray-800 transition ease-in-out duration-150 ml-2"
+                                        class="inline-flex justify-center w-full rounded-md border border-gray-300 px-4 py-2 bg-white text-sm leading-5 font-medium text-gray-700 hover:text-gray-500 focus:outline-none focus:border-blue-300 focus:shadow-outline-blue active:bg-gray-50 active:text-gray-800 transition ease-in-out duration-150"
                                         id="dropdown-menujenis" aria-haspopup="true" aria-expanded="false">
-                                        Pilih Kategori Sampah
-                                        <svg class="-mr-1 ml-2 h-5 w-5" xmlns="http://www.w3.org/2000/svg"
-                                            viewBox="0 0 20 20" fill="currentColor">
-                                            <path fill-rule="evenodd" d="M10 12l-6-6 1.5-1.5L10 9.8l4.5-4.5L16 6l-6 6z"
+                                        Pilih Kategori
+                                        <svg class="-mr-1 ml-2 h-5 w-5 text-gray-400" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20"
+                                            fill="currentColor">
+                                            <path fill-rule="evenodd"
+                                                d="M10 12l-6-6 1.5-1.5L10 9.8l4.5-4.5L16 6l-6 6z"
                                                 clip-rule="evenodd" />
                                         </svg>
                                     </button>
-                                </div>
-                                <div class="origin-top-right z-10 absolute left-0 mt-2 w-96 rounded-md shadow-lg hidden"
-                                    id="dropdown-listjenis">
-                                    <div class="rounded-md bg-white shadow-xs">
-                                        <div class="px-4 py-3">
-                                            <div class="grid grid-cols-3 gap-1">
-                                                @foreach ($kategoris as $item)
-                                                    <label class="inline-flex items-center">
-                                                        <input type="checkbox" name="selectedJenis[]"
-                                                            value="{{ $item->id_kategori }}" class="form-checkbox">
-                                                        <span class="ml-2">{{ ucwords($item->nama_kategori) }}</span>
-                                                    </label>
+                                    <div
+                                        class="origin-top-right z-10 absolute left-0 mt-2 w-96 rounded-md shadow-lg hidden bg-white border border-gray-200"
+                                        id="dropdown-listjenis">
+                                        <div class="rounded-md shadow-xs">
+                                            <div class="px-4 py-3 grid grid-cols-3 gap-1">
+                                                @foreach ($kategoris as $kategori)
+                                                <label class="inline-flex items-center">
+                                                    <input type="checkbox" name="selectedJenis[]" value="{{ $kategori->id_kategori }}"
+                                                        class="form-checkbox rounded text-blue-500">
+                                                    <span class="ml-2 text-gray-700">{{ ucwords($kategori->nama_kategori) }}</span>
+                                                </label>
                                                 @endforeach
                                             </div>
                                         </div>
@@ -102,78 +134,50 @@
                             </div>
 
                             <!-- Subkategori Sampah filter -->
-                            <h4 class="text-md font-semibold mb-2 mt-2">Subkategori Sampah</h4>
-                            <div class="relative inline-block text-left ml-2 mr-2">
-                                <div>
+                            <div class="mb-4">
+                                <label for="dropdown-menusubjenis" class="block text-sm font-medium text-gray-700">Subkategori Sampah</label>
+                                <div class="relative">
                                     <button type="button"
-                                        class="inline-flex justify-center w-full rounded-md border border-gray-300 px-4 py-2 bg-white text-sm leading-5 font-medium text-slate-500 hover:text-gray-500 focus:outline-none focus:border-blue-300 focus:shadow-outline-blue active:bg-gray-50 active:text-gray-800 transition ease-in-out duration-150 ml-2"
+                                        class="inline-flex justify-center w-full rounded-md border border-gray-300 px-4 py-2 bg-white text-sm leading-5 font-medium text-gray-700 hover:text-gray-500 focus:outline-none focus:border-blue-300 focus:shadow-outline-blue active:bg-gray-50 active:text-gray-800 transition ease-in-out duration-150"
                                         id="dropdown-menusubjenis" aria-haspopup="true" aria-expanded="false">
-                                        Pilih Subkategori Sampah
-                                        <svg class="-mr-1 ml-2 h-5 w-5" xmlns="http://www.w3.org/2000/svg"
-                                            viewBox="0 0 20 20" fill="currentColor">
-                                            <path fill-rule="evenodd" d="M10 12l-6-6 1.5-1.5L10 9.8l4.5-4.5L16 6l-6 6z"
+                                        Pilih Subkategori
+                                        <svg class="-mr-1 ml-2 h-5 w-5 text-gray-400" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20"
+                                            fill="currentColor">
+                                            <path fill-rule="evenodd"
+                                                d="M10 12l-6-6 1.5-1.5L10 9.8l4.5-4.5L16 6l-6 6z"
                                                 clip-rule="evenodd" />
                                         </svg>
                                     </button>
-                                </div>
-                                <div class="origin-top-right z-10 absolute left-0 mt-2 w-96 rounded-md shadow-lg hidden"
-                                    id="dropdown-listsubjenis">
-                                    <div class="rounded-md bg-white shadow-xs">
-                                        <div class="px-4 py-3">
-                                            <div class="grid grid-cols-3 gap-1">
-                                                @foreach ($subkategoris as $item)
-                                                    <label class="inline-flex items-center">
-                                                        <input type="checkbox" name="selectedSubJenis[]"
-                                                            value="{{ $item->id_subkategori }}" class="form-checkbox">
-                                                        <span
-                                                            class="ml-2">{{ ucwords($item->nama_subkategori) }}</span>
-                                                    </label>
-                                                @endforeach
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-
-                            <!-- Provinsi filter -->
-                            <h4 class="text-md font-semibold mb-2 mt-2">Provinsi</h4>
-                            <div class="relative inline-block text-left ml-2 mr-2 mb-6">
-                                <div>
-                                    <button type="button"
-                                        class="inline-flex justify-center w-full rounded-md border border-gray-300 px-4 py-2 bg-white text-sm leading-5 font-medium text-slate-500 hover:text-gray-500 focus:outline-none focus:border-blue-300 focus:shadow-outline-blue active:bg-gray-50 active:text-gray-800 transition ease-in-out duration-150 ml-2"
-                                        id="dropdown-menuprovinsi" aria-haspopup="true" aria-expanded="false">
-                                        Pilih Provinsi
-                                        <svg class="-mr-1 ml-2 h-5 w-5" xmlns="http://www.w3.org/2000/svg"
-                                            viewBox="0 0 20 20" fill="currentColor">
-                                            <path fill-rule="evenodd" d="M10 12l-6-6 1.5-1.5L10 9.8l4.5-4.5L16 6l-6 6z"
-                                                clip-rule="evenodd" />
-                                        </svg>
-                                    </button>
-                                </div>
-                                <div class="origin-top-right z-10 absolute left-0 mt-2 w-96 rounded-md shadow-lg hidden"
-                                    id="dropdown-listprovinsi">
-                                    <div class="rounded-md bg-white shadow-xs">
-                                        <div class="px-4 py-3">
-                                            <div class="grid grid-cols-3 gap-1">
-                                                @foreach ($provinsis as $item)
-                                                    <label class="inline-flex items-center">
-                                                        <input type="checkbox" name="selectedProvinsi[]"
-                                                            value="{{ $item->id_provinsi }}" class="form-checkbox">
-                                                        <span class="ml-2">{{ ucwords($item->nama_provinsi) }}</span>
-                                                    </label>
-                                                @endforeach
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-
-                            <!-- Filter Button -->
-                            <input type="submit"
-                                class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 w-full rounded mt-4"
-                                value="Filter">
-                        </form>
+                                    <div
+                                        class="origin-top-right z-10 absolute left-0
+                    mt-2 w-96 rounded-md shadow-lg hidden bg-white border border-gray-200"
+                    id="dropdown-listsubjenis">
+                    <div class="rounded-md shadow-xs">
+                        <div class="px-4 py-3 grid grid-cols-3 gap-1">
+                            @foreach ($subkategoris as $subkategori)
+                            <label class="inline-flex items-center">
+                                <input type="checkbox" name="selectedSubjenis[]"
+                                    value="{{ $subkategori->id_subkategori }}"
+                                    class="form-checkbox rounded text-blue-500">
+                                <span
+                                    class="ml-2 text-gray-700">{{ ucwords($subkategori->nama_subkategori) }}</span>
+                            </label>
+                            @endforeach
+                        </div>
                     </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Filter Button -->
+        <div class="mt-4">
+            <input type="submit"
+                class="w-full bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded transition duration-150 ease-in-out"
+                value="Filter">
+        </div>
+    </form>
+</div>
+
                 </div>
 
                 <script>
@@ -242,23 +246,29 @@
                     altFormat: "Y/m/d",
                 });
 
+                document.addEventListener('DOMContentLoaded', function() {
+
 
                 var userCtx = document.getElementById('userChart').getContext('2d');
+                var saranalabels = [];
+                var saranaDatasets = [];
+                @foreach ($stackedBarData as $saranaId => $saranaData)
+                    @foreach ($saranaData as $data)
+                        saranalabels.push({!! json_encode($data->nama_sarana) !!});
+                        saranaDatasets.push({
+                            label: {!! json_encode($data->nama_sarana) !!},
+                            data: [{!! json_encode($data->total_sampah) !!}],
+                            backgroundColor: 'rgba({{ rand(0, 255) }}, {{ rand(0, 255) }}, {{ rand(0, 255) }}, 0.2)',
+                            borderColor: 'rgba({{ rand(0, 255) }}, {{ rand(0, 255) }}, {{ rand(0, 255) }}, 1)',
+                            borderWidth: 1
+                        });
+                    @endforeach
+                @endforeach
                 var userChart = new Chart(userCtx, {
                     type: 'bar',
                     data: {
-                        labels: <?php echo json_encode($users->pluck('name')); ?>,
-                        datasets: [
-                            @foreach ($stackedBarData as $userId => $data)
-                                {
-                                    label: '{{ $users->find($userId)->name }}',
-                                    data: {!! json_encode($data->pluck('total_sampah')) !!},
-                                    backgroundColor: 'rgba({{ rand(0, 255) }}, {{ rand(0, 255) }}, {{ rand(0, 255) }}, 0.2)',
-                                    borderColor: 'rgba({{ rand(0, 255) }}, {{ rand(0, 255) }}, {{ rand(0, 255) }}, 1)',
-                                    borderWidth: 1
-                                },
-                            @endforeach
-                        ]
+                        labels: saranalabels,
+                        datasets: saranaDatasets
                     },
                     options: {
                         maintainAspectRatio: false,
@@ -266,7 +276,7 @@
                         plugins: {
                             title: {
                                 display: true,
-                                text: 'Jumlah Sampah Terlapor (Kg)',
+                                text: 'Jumlah Sampah per Sarana (Kg)',
                                 font: {
                                     size: 10
                                 }
@@ -368,21 +378,26 @@
                 });
 
                 var provinsiCtx = document.getElementById('provinsiChart').getContext('2d');
+                var labels = [];
+                var datasets = [];
+                @foreach ($barChartData as $provinceId => $provinceData)
+                    @foreach ($provinceData as $data)
+                        labels.push({!! json_encode($data->nama_provinsi) !!});
+                        datasets.push({
+                            label: {!! json_encode($data->nama_provinsi) !!},
+                            data: [{!! json_encode($data->total_sampah) !!}],
+                            backgroundColor: 'rgba({{ rand(0, 255) }}, {{ rand(0, 255) }}, {{ rand(0, 255) }}, 0.2)',
+                            borderColor: 'rgba({{ rand(0, 255) }}, {{ rand(0, 255) }}, {{ rand(0, 255) }}, 1)',
+                            borderWidth: 1
+                        });
+                    @endforeach
+                @endforeach
+
                 var provinsiChart = new Chart(provinsiCtx, {
                     type: 'bar',
                     data: {
-                        labels: {!! json_encode($provinsis->pluck('nama_provinsi')) !!},
-                        datasets: [
-                            @foreach ($barChartData as $provinsiId => $data)
-                                {
-                                    label: '{{ $provinsis->find($provinsiId)->nama_provinsi }}',
-                                    data: {!! json_encode($data->pluck('total_sampah')) !!},
-                                    backgroundColor: 'rgba({{ rand(0, 255) }}, {{ rand(0, 255) }}, {{ rand(0, 255) }}, 0.2)',
-                                    borderColor: 'rgba({{ rand(0, 255) }}, {{ rand(0, 255) }}, {{ rand(0, 255) }}, 1)',
-                                    borderWidth: 1
-                                },
-                            @endforeach
-                        ]
+                        labels: labels,
+                        datasets: datasets
                     },
                     options: {
                         responsive: true,
@@ -432,6 +447,7 @@
                         }
                     }
                 });
+            });
             </script>
 
         </div>
