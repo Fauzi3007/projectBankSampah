@@ -5,20 +5,19 @@
             @method('PUT')
               @csrf
             <div class="grid grid-cols-1 gap-6 sm:grid-cols-2">
-  
+
                 <x-label for="nama_kategori">{{ __('Nama Kategori') }} </x-label>
                 <x-input id="nama_kategori" type="text" name="nama_kategori" :value="old('nama_kategori',$kategori->nama_kategori)"
                     required />
             </div>
-  
+
             <div class="flex items-center justify-between mt-6 col-span-2">
                 <x-button type="submit">
                     {{ __('Simpan') }}
                 </x-button>
             </div>
         </form>
-        <x-validation-errors class="mt-4" /> 
+        <x-validation-errors class="mt-4" />
     </div>
-  
+
   </x-app-layout>
-  

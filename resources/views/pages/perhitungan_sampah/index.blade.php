@@ -233,7 +233,7 @@
                                     </td>
 
                                     <td class="p-2 whitespace-nowrap">
-                                        <div class="text-left">{{ $item->sarana->nama_sarana }}</div>
+                                        <div class="text-left">{{ $item->sarana ? $item->sarana->nama_sarana : 'N/A' }}</div>
                                     </td>
                                     <td class="p-2 whitespace-nowrap">
                                         <div class="text-left">{{ $item->kategori->nama_kategori }}</div>

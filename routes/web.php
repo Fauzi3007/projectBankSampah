@@ -42,7 +42,7 @@ Route::middleware(['auth:sanctum', 'verified'])->group(function () {
     Route::delete('perhitungan_sampah/{perhitungan_sampah}', [PerhitunganSampahController::class, 'destroy'])->name('perhitungan_sampah.destroy');
 
     // Sarana
-    Route::get('sarana', [SaranaController::class, 'index'])->name('sarana.index');
+    Route::get('sarana', [SaranaController::class, 'index'])->name('sarana.index')->middleware('admin');
     Route::post('sarana', [SaranaController::class, 'store'])->name('sarana.store')->middleware('admin');
     Route::get('sarana/create', [SaranaController::class, 'create'])->name('sarana.create')->middleware('admin');
     Route::get('sarana/{sarana}', [SaranaController::class, 'show'])->name('sarana.show')->middleware('admin');

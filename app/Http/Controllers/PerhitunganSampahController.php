@@ -118,6 +118,7 @@ class PerhitunganSampahController extends Controller
             'kategori_id_kategori' => 'required|integer',
             'subkategori_id_subkategori' => 'required|integer',
             'user_id_user' => 'required',
+
         ]);
 
         PerhitunganSampah::create($validated);

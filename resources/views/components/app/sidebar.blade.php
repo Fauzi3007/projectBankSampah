@@ -65,6 +65,9 @@
                         </a>
                     </li>
                     <!-- Sarana -->
+                    @if (Auth::user()->role == 'admin' || Auth::user()->role == 'super admin')
+
+
                     <li
                         class="px-3 py-2 rounded-sm mb-0.5 last:mb-0 @if (in_array(Request::segment(1), ['sarana'])) {{ 'bg-slate-900' }} @endif">
                         <a title="Sarana"
@@ -87,6 +90,7 @@
                             </div>
                         </a>
                     </li>
+                    @endif
                     <!-- Perhitungan Sampah -->
                     <li
                         class="px-3 py-2 rounded-sm mb-0.5 last:mb-0 @if (in_array(Request::segment(1), ['perhitungan_sampah'])) {{ 'bg-slate-900' }} @endif">
@@ -130,6 +134,8 @@
                         </a>
                     </li>
 
+                    @if (Auth::user()->role == 'admin' || Auth::user()->role == 'super admin')
+
                     <!-- kategori -->
                     <li
                         class="px-3 py-2 rounded-sm mb-0.5 last:mb-0 @if (in_array(Request::segment(1), ['kategori'])) {{ 'bg-slate-900' }} @endif">
@@ -155,6 +161,10 @@
                             </div>
                         </a>
                     </li>
+                    @endif
+
+                    @if (Auth::user()->role == 'admin' || Auth::user()->role == 'super admin')
+
                     <!-- Subkategori -->
                     <li
                         class="px-3 py-2 rounded-sm mb-0.5 last:mb-0 @if (in_array(Request::segment(1), ['subkategori'])) {{ 'bg-slate-900' }} @endif">
@@ -180,7 +190,7 @@
                             </div>
                         </a>
                     </li>
-
+                    @endif
                     <!-- Provinsi -->
                     @if ( Auth::user()->role == 'super admin')
                         <li

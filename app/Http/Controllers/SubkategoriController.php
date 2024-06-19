@@ -46,31 +46,31 @@ class SubkategoriController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(Subkategori $subkategoris)
+    public function show(Subkategori $subkategori)
     {
-        return view('pages.subkategori.show', compact('subkategoris'));
+        return view('pages.subkategori.show', compact('subkategori'));
     }
 
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(Subkategori $subkategoris)
+    public function edit(Subkategori $subkategori)
     {
         $kategoris = Kategori::all();
-        return view('pages.subkategori.edit', compact('subkategoris', 'kategoris'));
+        return view('pages.subkategori.edit', compact('subkategori', 'kategoris'));
     }
 
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, Subkategori $subkategoris)
+    public function update(Request $request, Subkategori $subkategori)
     {
         $request->validate([
             'nama_subkategori' => 'required|string',
             'kategori_id_kategori' => 'required'
         ]);
 
-        $subkategoris->update($request->all());
+        $subkategori->update($request->all());
 
         return redirect()->route('subkategori.index')
             ->with('success', 'Subkategori updated successfully');
@@ -79,9 +79,10 @@ class SubkategoriController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(Subkategori $subkategoris)
+    public function destroy(Subkategori $subkategori)
     {
-        $subkategoris->delete();
+
+        $subkategori->delete();
 
         return redirect()->route('subkategori.index')
             ->with('success', 'Subkategori deleted successfully');

@@ -11,7 +11,7 @@ class Sarana extends Model
 
     protected $table = 'saranas';
     protected $primaryKey = 'id_sarana';
-    protected $fillable = ['nama_sarana', 'alamat_sarana','provinsi_id_provinsi', 'jenis_sarana','nama_admin'];
+    protected $fillable = ['nama_sarana', 'alamat_sarana','provinsi_id_provinsi', 'jenis_sarana','nama_admin','no_hp'];
     public $timestamps = true;
 
     public function provinsi()

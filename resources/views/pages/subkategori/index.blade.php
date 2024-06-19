@@ -13,7 +13,7 @@
           </div>
       </div>
       <!-- Cards -->
-      <a href="{{route('kategori.create')}}" class="btn bg-indigo-500 hover:bg-indigo-600 text-white">
+      <a href="{{route('subkategori.create')}}" class="btn bg-indigo-500 hover:bg-indigo-600 text-white">
           <svg class="w-4 h-4 fill-current opacity-50 shrink-0" viewBox="0 0 16 16">
               <path d="M15 7H9V1c0-.6-.4-1-1-1S7 .4 7 1v6H1c-.6 0-1 .4-1 1s.4 1 1 1h6v6c0 .6.4 1 1 1s1-.4 1-1V9h6c.6 0 1-.4 1-1s-.4-1-1-1z" />
           </svg>
@@ -27,7 +27,7 @@
       <div class="grid grid-cols-12 gap-6 mt-2">
         <div class="col-span-full  bg-white dark:bg-slate-800 shadow-lg rounded-sm border border-slate-200 dark:border-slate-700">
             <header class="px-5 py-4 border-b border-slate-100 dark:border-slate-700">
-                <h2 class="font-semibold text-slate-800 dark:text-slate-100">Kategori</h2>
+                <h2 class="font-semibold text-slate-800 dark:text-slate-100">Subkategori</h2>
             </header>
             <div class="p-3">
 
@@ -67,7 +67,7 @@
                                     <div class="text-left">{{$item->nama_subkategori}}</div>
                                 </td>
                                 <td class="p-2 whitespace-nowrap">
-                                    <div class="text-left">{{$item->kategori->nama_kategori}}</div>
+                                    <div class="text-left">{{$item->kategori ? $item->kategori->nama_kategori : 'N/A'}}</div>
                                 </td>
                                 <td class="p-2 whitespace-nowrap flex justify-center items-center gap-1">
                                     <a href="{{route('subkategori.edit',$item->id_subkategori)}}" class="px-4 py-2 rounded-md bg-yellow-300 hover:bg-yellow-400 text-white sm:mt-0">Edit</a>

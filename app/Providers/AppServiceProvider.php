@@ -12,16 +12,19 @@ class AppServiceProvider extends ServiceProvider
      */
     public function register(): void
     {
-        //
     }
 
     /**
      * Bootstrap any application services.
      */
-    public function boot(): void
+    public function boot()
     {
-        // if (config('app.env') === 'production') {
-        //     URL::forceScheme('https');
+        // if (isset($_SERVER['HTTP_X_ORIGINAL_HOST'])) {
+        //     $url = 'https://' . $_SERVER['HTTP_X_ORIGINAL_HOST'];
+        //     URL::forceRootUrl($url);
+        //     if (str_contains($url, 'ngrok.io')) {
+        //         URL::forceScheme('https');
+        //     }
         // }
     }
 }

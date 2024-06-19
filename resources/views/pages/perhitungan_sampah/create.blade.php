@@ -76,6 +76,7 @@
                   <x-label for="jumlah_sampah">{{ __('Jumlah Sampah') }} </x-label>
                   <x-input id="jumlah_sampah" type="number" name="jumlah_sampah" :value="old('jumlah_sampah')" required />
 
+
                 <x-label for="sarana_id_sarana">{{ __('Sarana') }} </x-label>
                 <select id="sarana_id_sarana" name="sarana_id_sarana" :value="old('sarana_id_sarana')" required class="block w-full px-4 py-2 mt-2 text-gray-700 bg-white border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-blue-500 focus:border-blue-500 sm:text-sm">
                     <option value="" disabled selected>Select an option</option>

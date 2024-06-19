@@ -40,6 +40,7 @@ class PenggunaSaranaController extends Controller
             'no_hp' => ['required', 'max:20'],
             'email' => ['required', 'max:50'],
             'password' => ['required', 'max:50'],
+            'sarana_id_sarana' => ['required'], // tambah 'sarana_id_sarana' => ['required'],
             'role' => ['required'],
 
         ]);
@@ -55,6 +56,7 @@ class PenggunaSaranaController extends Controller
             'id_akun'=> User::latest()->first()->id,
             'nama_pengguna' => $validatedData['nama_pengguna'],
             'no_hp' => $validatedData['no_hp'],
+            'sarana_id_sarana' => $validatedData['sarana_id_sarana'],
         ]);
 
 
@@ -67,7 +69,7 @@ class PenggunaSaranaController extends Controller
      */
     public function show(PenggunaSarana $pengguna_sarana)
     {
-        $saranas = Sarana::all();
+        $saranas = Sarana::where('nama_admin', 'pengguna_sarana.sarana_id_sarana')->get();
         return view('pages.pengguna_sarana.show', compact('pengguna_sarana','saranas'));
     }
 
@@ -90,6 +92,7 @@ class PenggunaSaranaController extends Controller
             'no_hp' => ['required', 'max:20'],
             'email' => ['required', 'max:50'],
             'password' => ['required', 'max:50'],
+            'sarana_id_sarana' => ['required'], // tambah 'sarana_id_sarana' => ['required'],
             'role' => ['required', 'max:20'],
 
         ]);
@@ -105,6 +108,7 @@ class PenggunaSaranaController extends Controller
             'id_akun'=> $pengguna_sarana->user->id,
             'nama_pengguna' => $validatedData['nama_pengguna'],
             'no_hp' => $validatedData['no_hp'],
+            'sarana_id_sarana' => $validatedData['sarana_id_sarana'],
         ]);
 
         return redirect()->route('pengguna_sarana.index')->with('success', 'Pengguna Sarana updated successfully.');
@@ -116,6 +120,7 @@ class PenggunaSaranaController extends Controller
     public function destroy(PenggunaSarana $pengguna_sarana)
     {
         $pengguna_sarana->delete();
+        $user = User::find($pengguna_sarana->id_akun)->delete();
 
         return redirect()->route('pengguna_sarana.index')->with('success', 'Pengguna Sarana deleted successfully.');
     }

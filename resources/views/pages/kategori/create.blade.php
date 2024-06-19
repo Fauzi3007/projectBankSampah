@@ -16,7 +16,7 @@
               </x-button>
           </div>
       </form>
-      <x-validation-errors class="mt-4" /> 
+      <x-validation-errors class="mt-4" />
   </div>
 
 </x-app-layout>

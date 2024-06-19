@@ -53,6 +53,8 @@
                                         <div class="font-semibold text-left">Role</div>
                                     </th>
                                     <th class="p-2 whitespace-nowrap">
+                                        <div class="font-semibold text-center">Sarana</div>
+                                    <th class="p-2 whitespace-nowrap">
                                         <div class="font-semibold text-center">Aksi</div>
                                     </th>
 
@@ -78,6 +80,16 @@
                                         </td>
                                         <td class="p-2 whitespace-nowrap">
                                             <div class="text-left">{{ $item->user->role }}</div>
+                                        </td>
+                                        @if ($item->sarana)
+                                            <td class="p-2 whitespace-nowrap">
+                                                <div class="text-center">{{ $item->sarana->nama_sarana }}</div>
+                                            </td>
+                                        @else
+                                            <td class="p-2 whitespace-nowrap">
+                                                <div class="text-center">-</div>
+                                            </td>
+                                        @endif
                                         @if ($item->user->role !== 'super admin')
                                             <td class="p-2 whitespace-nowrap flex justify-center items-center gap-1">
                                                 <a href="{{ route('pengguna_sarana.edit', $item->id_pengguna_sarana) }}"

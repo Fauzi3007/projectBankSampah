@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\PenggunaSarana;
 use App\Models\Provinsi;
 use App\Models\Sarana;
+use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
@@ -16,9 +17,9 @@ class SaranaController extends Controller
     public function index()
     {
         $provinsis = Provinsi::all();
-        $jenis_sarana = Sarana::select('jenis_sarana')->distinct()->get();
+        // $jenis_sarana = Sarana::select('jenis_sarana')->distinct()->get();
         $saranas = Sarana::paginate(5);
-        return view('pages.sarana.index', compact('saranas', 'provinsis', 'jenis_sarana'));
+        return view('pages.sarana.index', compact('saranas', 'provinsis'));
     }
 
     /**
@@ -27,17 +28,17 @@ class SaranaController extends Controller
     public function filter(Request $request)
     {
         $provinsis = Provinsi::all();
-        $jenis_sarana = Sarana::select('jenis_sarana')->distinct()->get();
+        // $jenis_sarana = Sarana::select('jenis_sarana')->distinct()->get();
 
         $lokasi = $request->input('selectedProvinsi');
-        $jenis = $request->input('selectedJenisSarana');
+        // $jenis = $request->input('selectedJenisSarana');
 
 
         $sarana = Sarana::query();
 
         $filters = [
             'provinsi_id_provinsi' => $lokasi,
-            'jenis_sarana' => $jenis,
+            // 'jenis_sarana' => $jenis,
         ];
 
         foreach ($filters as $column => $value) {
@@ -48,7 +49,7 @@ class SaranaController extends Controller
 
         $saranas = $sarana->paginate(5);
 
-        return view('pages.sarana.index', compact('saranas', 'provinsis', 'jenis_sarana'));
+        return view('pages.sarana.index', compact('saranas', 'provinsis'));
     }
 
     /**
@@ -57,7 +58,8 @@ class SaranaController extends Controller
     public function create()
     {
         $provinsis = Provinsi::all();
-        return view('pages.sarana.create', compact('provinsis'));
+        $users = User::where('id', Auth::user()->id)->get();
+        return view('pages.sarana.create', compact('provinsis','users'));
     }
 
     /**
@@ -68,10 +70,10 @@ class SaranaController extends Controller
         $validatedData = $request->validate([
             'nama_sarana' => ['required', 'max:50'],
             'alamat_sarana' => ['required', 'max:100'],
-            'jenis_sarana' => ['required', 'max:50'],
+            'jenis_sarana' => [ 'max:50'],
             'provinsi_id_provinsi' => ['required',],
-            'nama_admin' => 'required'
-
+            'nama_admin' => ['required'],
+            'no_hp' => 'required|numeric'
         ]);
 
         Sarana::create($validatedData);
@@ -93,7 +95,9 @@ class SaranaController extends Controller
      */
     public function edit(Sarana $sarana)
     {
-        return view('pages.sarana.edit', compact('sarana'));
+        $provinsis = Provinsi::all();
+        $users = User::where('id', '=', $sarana->nama_admin)->get();
+        return view('pages.sarana.edit', compact('sarana', 'users', 'provinsis'));
     }
 
     /**
@@ -104,9 +108,11 @@ class SaranaController extends Controller
         $validatedData = $request->validate([
             'nama_sarana' => ['required', 'max:50'],
             'alamat_sarana' => ['required', 'max:100'],
-            'jenis_sarana' => ['required', 'max:50'],
+            'jenis_sarana' => ['max:50'],
             'provinsi_id_provinsi' => ['required',],
-            'nama_admin' => 'required'
+            'nama_admin' => ['required'],
+            'no_hp' => 'required|numeric'
+
 
         ]);
 

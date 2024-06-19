@@ -12,8 +12,11 @@
               <x-label for="alamat_sarana">{{ __('Alamat Sarana') }} </x-label>
               <x-input id="alamat_sarana" type="text"  name="alamat_sarana" :value="old('alamat_sarana')" required />
 
-              <x-label for="jenis_sarana">{{ __('Jenis Sarana') }} </x-label>
-              <x-input id="jenis_sarana" type="text"  name="jenis_sarana" :value="old('jenis_sarana')" required />
+              {{-- <x-label for="jenis_sarana">{{ __('Jenis Sarana') }} </x-label>
+              <x-input id="jenis_sarana" type="text"  name="jenis_sarana" :value="old('jenis_sarana')" required /> --}}
+
+              <x-label for="no_hp">{{ __('Nomor Telepon') }} </x-label>
+                <x-input id="no_hp" type="text" name="no_hp" :value="old('no_hp')" required />
 
               <x-label for="provinsi_id_provinsi">{{ __('provinsi') }} </x-label>
               <select id="provinsi_id_provinsi" name="provinsi_id_provinsi" :value="old('provinsi_id_provinsi')" required class="block w-full px-4 py-2 mt-2 text-gray-700 bg-white border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-blue-500 focus:border-blue-500 sm:text-sm">
@@ -23,9 +26,13 @@
                   @endforeach
 
                 </select>
-                <x-label for="nama_admin">{{ __('Nama Admin') }} </x-label>
 
-                <x-input id="nama_admin" type="text" disabled name="nama_admin" placeholder="{{Auth::user()->name}}" :value="old('nama_admin',Auth::user()->id)" required />
+                <x-label for="nama_admin">{{ __('Nama Admin') }} </x-label>
+                <select id="nama_admin" name="nama_admin" required class="block w-full px-4 py-2 mt-2 text-gray-700 bg-white border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-blue-500 focus:border-blue-500 sm:text-sm">
+                    @foreach($users as $admin)
+                        <option value="{{ $admin->id }}">{{ $admin->name }}</option>
+                    @endforeach
+                </select>
 
 
           </div>

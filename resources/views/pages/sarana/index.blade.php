@@ -32,7 +32,7 @@
                                 </div>
                             </div>
 
-                            <!-- Jenis Sarana Dropdown -->
+                            {{-- <!-- Jenis Sarana Dropdown -->
                             <div class="relative inline-block text-left ml-2 mr-2">
                                 <button type="button" class="inline-flex justify-center w-full rounded-md border border-gray-300 px-4 py-2 bg-white text-sm leading-5 font-medium text-slate-500 hover:text-gray-500 focus:outline-none focus:border-blue-300 focus:shadow-outline-blue active:bg-gray-50 active:text-gray-800 transition ease-in-out duration-150 ml-2" id="dropdown-menuuser" aria-haspopup="true" aria-expanded="false">
                                     Pilih Jenis Sarana
@@ -54,7 +54,7 @@
                                         </div>
                                     </div>
                                 </div>
-                            </div>
+                            </div> --}}
 
                             <button type="submit" class="px-4 py-2 rounded-md bg-blue-500 text-white mt-2 sm:mt-0">Filter</button>
                         </div>
@@ -104,11 +104,14 @@
                                 <th class="p-2 whitespace-nowrap">
                                     <div class="font-semibold text-left">Alamat Sarana</div>
                                 </th>
-                                <th class="p-2 whitespace-nowrap">
+                                {{-- <th class="p-2 whitespace-nowrap">
                                     <div class="font-semibold text-left">Jenis Sarana</div>
-                                </th>
+                                </th> --}}
                                 <th class="p-2 whitespace-nowrap">
                                     <div class="font-semibold text-left">Provinsi</div>
+                                </th>
+                                <th class="p-2 whitespace-nowrap">
+                                    <div class="font-semibold text-left">Nomor Telepon</div>
                                 </th>
                                 <th class="p-2 whitespace-nowrap">
                                     <div class="font-semibold text-left">Nama Admin</div>
@@ -136,11 +139,14 @@
                                     <td class="p-2 whitespace-nowrap">
                                         <div class="text-left">{{ $item->alamat_sarana }}</div>
                                     </td>
-                                    <td class="p-2 whitespace-nowrap">
+                                    {{-- <td class="p-2 whitespace-nowrap">
                                         <div class="text-left">{{ $item->jenis_sarana }}</div>
-                                    </td>
+                                    </td> --}}
                                     <td class="p-2 whitespace-nowrap">
                                         <div class="text-left">{{ $item->provinsi->nama_provinsi }}</div>
+                                    </td>
+                                    <td class="p-2 whitespace-nowrap">
+                                        <div class="text-left">{{ $item->no_hp }}</div>
                                     </td>
                                     <td class="p-2 whitespace-nowrap">
                                         <div class="text-left">{{ $item->user->name}}</div>
